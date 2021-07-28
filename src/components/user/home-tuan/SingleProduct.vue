@@ -8,15 +8,17 @@
         alt=""
       />
     </div>
-    <!-- name -->
-    <h2 class="product-name">Shoe</h2>
-    <!-- price - buy -->
-    <div class="product-bottom">
-      <div class="product-price">1.000.000 vnd</div>
+    <div class="product-detail">
+      <!-- name -->
+      <h2 class="product-name">Shoe</h2>
+      <!-- price - buy -->
+      <div class="product-bottom">
+        <div class="product-price">1.000.000 vnd</div>
 
-      <button class="button-buy-product">
-        <i class="fas fa-shopping-cart"></i>
-      </button>
+        <button class="button-buy-product">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,20 +32,29 @@ export default {};
   width: 200px;
   transition: var(--tran03);
   margin: 0px 10px;
+  cursor: pointer;
+
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .single-product:hover {
   color: var(--text-hover);
 }
 
+.product-detail {
+  padding: 10px 10px;
+}
 .product-img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
+.single-product:hover .product-img {
+  border: 3px solid var(--btn-hover);
+}
 .product-img:hover {
-  border: 2px solid var(--background-dark);
+  border: 3px solid var(--btn-hover);
 }
 
 .product-name {

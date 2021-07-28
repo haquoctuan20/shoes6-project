@@ -33,6 +33,11 @@ export default {
   --backgound-gray: #efefef;
   --background-dark: #203647;
 
+  /* button */
+  --btn-default: #4da8da;
+  --btn-hover: #007cc7;
+  --btn-text-hover: #eefbfb;
+
   /* transition */
   --tran03: ease-in-out 0.3s;
   --tran06: ease-in-out 0.6s;
@@ -43,5 +48,15 @@ body {
   font-size: 14px;
   color: var(--text-dark);
   margin: auto 20px;
+}
+
+/* css button */
+.btn {
+  padding: 14px 40px;
+  background-color: var(--btn-default);
+}
+.btn:hover {
+  background-color: var(--btn-hover);
+  transition: var(--tran03);
 }
 </style>
