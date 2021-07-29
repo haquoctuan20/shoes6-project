@@ -152,16 +152,20 @@
         </div>
       </div>
     </div>
+
+    <!-- footer -->
+    <Footer />
   </div>
 </template>
 
 <script>
 import ListNewProduct from "@/components/user/home-tuan/ListNewProduct.vue";
 import SingleProduct from "@/components/user/home-tuan/SingleProduct.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "Home",
 
-  components: { ListNewProduct, SingleProduct },
+  components: { ListNewProduct, SingleProduct, Footer },
 
   data: () => ({
     listCollection: ["Thể thao", "Leo núi", "Boots", "Oxford"],
@@ -372,7 +376,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 50px 5px 20px;
+  padding: 50px 5px 40px;
 }
 .support-item {
   display: flex;
