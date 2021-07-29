@@ -113,6 +113,45 @@
         </div>
       </div>
     </div>
+
+    <!-- support -->
+    <div class="home-support">
+      <div class="support-item">
+        <div class="support-item-icon">
+          <i class="fas fa-truck"></i>
+        </div>
+        <div class="support-item-text">
+          <p>Giao hàng miễn phí</p>
+        </div>
+      </div>
+
+      <div class="support-item">
+        <div class="support-item-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <div class="support-item-text">
+          <p>Lắng nghe khách hàng</p>
+        </div>
+      </div>
+
+      <div class="support-item">
+        <div class="support-item-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <div class="support-item-text">
+          <p>Đổi trả</p>
+        </div>
+      </div>
+
+      <div class="support-item">
+        <div class="support-item-icon">
+          <i class="far fa-copyright"></i>
+        </div>
+        <div class="support-item-text">
+          <p>Nhiều thương hiệu</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -262,7 +301,9 @@ export default {
 }
 
 /* best seller */
-
+.best-seller {
+  padding-bottom: 50px;
+}
 .best-seller > h2 {
   font-size: 36px;
   letter-spacing: 1px;
@@ -323,5 +364,28 @@ export default {
 
 .item-product-sellers {
   margin: 10px 10px 30px;
+}
+
+/* support */
+.home-support {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 5px 20px;
+}
+.support-item {
+  display: flex;
+  align-items: center;
+}
+.support-item-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+}
+.support-item-text {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
 }
 </style>
