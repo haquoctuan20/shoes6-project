@@ -30,7 +30,7 @@
             <p>
               GIẢM NGAY <span>50%</span> <br />CHO <span>LẦN MUA ĐẦU TIÊN</span>
             </p>
-            <button class="btn">Mua ngay</button>
+            <button class="btn" @click="openListProduct">Mua ngay</button>
           </div>
         </div>
       </v-parallax>
@@ -148,6 +148,11 @@ export default {
       },
     ],
   }),
+  methods: {
+    openListProduct() {
+      this.$router.push("/list-product");
+    },
+  },
 };
 </script>
 
