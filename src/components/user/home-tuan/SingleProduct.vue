@@ -1,7 +1,7 @@
 <template>
   <div class="single-product">
     <!-- img -->
-    <div>
+    <div @click="viewDetail">
       <img
         class="product-img"
         src="https://cdn.shopify.com/s/files/1/1811/9799/products/shoe19.jpg?v=1494313857"
@@ -10,12 +10,12 @@
     </div>
     <div class="product-detail">
       <!-- name -->
-      <h2 class="product-name">Shoe</h2>
+      <h2 class="product-name" @click="viewDetail">Shoe</h2>
       <!-- price - buy -->
       <div class="product-bottom">
         <div class="product-price">1.000.000 vnd</div>
 
-        <button class="button-buy-product">
+        <button class="button-buy-product" @click="addToCart">
           <i class="fas fa-shopping-cart"></i>
         </button>
       </div>
@@ -24,7 +24,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    /**
+     * Thêm vào giỏ hàng và chuyển màn hinh đến trang checkout
+     */
+    addToCart() {
+      this.$router.push("/checkout");
+    },
+
+    /**
+     * Chuyển mản hinh đến chi tiết sản phẩm kèm theo id,
+     * đang fix cứng id = 1
+     */
+    viewDetail() {
+      this.$router.push("/list-product/123");
+    },
+  },
+};
 </script>
 
 <style>
