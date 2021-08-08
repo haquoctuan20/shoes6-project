@@ -1,6 +1,7 @@
 <template>
   <div class="home-page">
     <!-- carousel -->
+
     <div class="home-carousel">
       <v-app>
         <v-carousel height="600" cycle interval="5000">
@@ -16,27 +17,39 @@
     </div>
 
     <!-- san pham moi -->
+
     <ListNewProduct />
 
     <!-- parallax -->
     <v-app>
-      <v-parallax
-        height="600"
-        src="https://cdn.shopify.com/s/files/1/1811/9799/files/banner-1.jpg?v=1494411699"
+      <v-lazy
+        v-model="isActive"
+        :options="{
+          threshold: 0.8,
+        }"
+        min-height="200"
+        transition="fade-transition"
       >
-        <div>
-          <div class="parallax-title">
-            <p>KHUYỄN MÃI MÙA HÈ NÀY</p>
-            <p>
-              GIẢM NGAY <span>50%</span> <br />CHO <span>LẦN MUA ĐẦU TIÊN</span>
-            </p>
-            <button class="btn" @click="openListProduct">Mua ngay</button>
+        <v-parallax
+          height="600"
+          src="https://cdn.shopify.com/s/files/1/1811/9799/files/banner-1.jpg?v=1494411699"
+        >
+          <div>
+            <div class="parallax-title">
+              <p>KHUYỄN MÃI MÙA HÈ NÀY</p>
+              <p>
+                GIẢM NGAY <span>50%</span> <br />CHO
+                <span>LẦN MUA ĐẦU TIÊN</span>
+              </p>
+              <button class="btn" @click="openListProduct">Mua ngay</button>
+            </div>
           </div>
-        </div>
-      </v-parallax>
+        </v-parallax>
+      </v-lazy>
     </v-app>
 
     <!-- best seller -->
+
     <div class="best-seller">
       <h2 class="best-seller-title">BEST SELLERS</h2>
       <p class="short-title">Xem ngay</p>
@@ -106,6 +119,7 @@
 <script>
 import ListNewProduct from "@/components/user/home-tuan/ListNewProduct.vue";
 import SingleProduct from "@/components/user/home-tuan/SingleProduct.vue";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -114,7 +128,7 @@ export default {
 
   data: () => ({
     listFeature: ["Tất cả", "Khuyến mại", "Bán chạy", "Mới"],
-
+    isActive: false,
     items_carousel: [
       {
         id: 1,
@@ -152,6 +166,27 @@ export default {
     openListProduct() {
       this.$router.push("/list-product");
     },
+
+    async getData() {
+      try {
+        const response = await axios.get(
+          "https://localhost:44380/category/all"
+        );
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    closeLayoutAdmin() {
+      this.$store.dispatch("closeLayoutAdmin");
+      console.log("Thoát admin");
+    },
+  },
+
+  created() {
+    this.getData();
+    this.closeLayoutAdmin();
   },
 };
 </script>

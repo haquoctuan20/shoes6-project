@@ -1,5 +1,5 @@
 <template>
-  <div class="list-product">cart code o day</div>
+  <div class="list-product">cart hover</div>
 </template>
 
 <script>

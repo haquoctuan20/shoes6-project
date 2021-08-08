@@ -1,13 +1,33 @@
 <template>
-  <div class="wrapper">
-    <!-- header -->
-    <Header />
-    <!-- nav -->
-    <Navbar />
-    <router-view> </router-view>
+  <div>
+    <div class="wrapper" v-if="!layoutAdmin">
+      <!-- header -->
+      <Header />
 
-    <!-- footer -->
-    <Footer />
+      <!-- nav -->
+      <Navbar />
+
+      <transition name="slide">
+        <router-view> </router-view>
+      </transition>
+      <!-- footer -->
+      <Footer />
+    </div>
+
+    <!-- ADMIN LAYOUT -->
+    <div class="wrapper-admin" v-if="layoutAdmin">
+      <div class="sidebar-admin-app">
+        <Sidebar />
+      </div>
+
+      <div class="content-admin-app">
+        <HeaderAdmin />
+
+        <transition name="slide">
+          <router-view> </router-view>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,14 +35,25 @@
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
 import Navbar from "@/components/Navbar.vue";
+// admin
+
+import Sidebar from "@/components/admin/Sidebar.vue";
+import HeaderAdmin from "@/components/admin/HeaderAdmin.vue";
 
 export default {
-  components: { Footer, Header, Navbar },
+  components: { Footer, Header, Navbar, Sidebar, HeaderAdmin },
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
+
+  computed: {
+    /**
+     * lấy data từ store
+     */
+    layoutAdmin() {
+      return this.$store.state.layoutAdmin;
+    },
+  },
 };
 </script>
 
@@ -57,9 +88,25 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   color: var(--text-dark);
+}
+
+.wrapper {
   margin: auto 20px;
 }
 
+.wrapper-admin {
+  display: flex;
+  background-color: var(--backgound-gray);
+}
+
+.sidebar-admin-app {
+  width: 220px;
+  height: 100vh;
+}
+.content-admin-app {
+  width: calc(100% - 220px);
+  height: 100vh;
+}
 /* css button */
 .btn {
   padding: 14px 40px;
@@ -68,5 +115,26 @@ body {
 .btn:hover {
   background-color: var(--btn-hover);
   transition: var(--tran03);
+}
+
+.slide-leave-active {
+  transition: opacity 300ms ease;
+  opacity: 0;
+  animation: slide-out 300ms ease-out forwards;
+}
+
+.slide-leave {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(30px);
+  }
 }
 </style>

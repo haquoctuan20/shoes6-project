@@ -28,11 +28,22 @@
         <i class="fas fa-search"></i>
       </div>
 
-      <div class="nav-option__item">
+      <div class="nav-option__item nav-option__item-login">
         <i class="fas fa-user-circle"></i>
+        <div class="menu-account">
+          <div class="menu-account__item" @click="openLogin">
+            Đăng nhập
+          </div>
+          <div class="menu-account__item" @click="openCreateAccount">
+            Tạo tài khoản
+          </div>
+          <div class="menu-account__item" @click="openAdmin">
+            Trang quản trị admin
+          </div>
+        </div>
       </div>
 
-      <router-link to="/cart">
+      <router-link to="/cart-detail">
         <div class="nav-option__item">
           <i class="fas fa-shopping-cart"></i>
           <span class="item-in-card">2</span>
@@ -47,7 +58,19 @@ export default {
   data: () => ({
     listCollection: ["Thể thao", "Leo núi", "Boots", "Oxford"],
   }),
-  methods: {},
+  methods: {
+    openAdmin() {
+      this.$router.push("/admin");
+    },
+
+    openLogin() {
+      this.$router.push("/login");
+    },
+
+    openCreateAccount() {
+      this.$router.push("/create-account");
+    },
+  },
 };
 </script>
 
@@ -95,6 +118,7 @@ a {
   transform: translate(0, -3px);
   color: var(--text-hover);
   transition: var(--tran03);
+  z-index: 1;
 }
 .item-in-card {
   position: absolute;
@@ -107,5 +131,57 @@ a {
   color: var(--text-light);
   border-radius: 10px;
   background-color: #ff0000;
+}
+
+.nav-option__item-login {
+  position: relative;
+}
+
+.nav-option__item-login .menu-account {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  width: 180px;
+  background-color: #fff;
+}
+
+.nav-option__item-login .menu-account::after {
+  content: "";
+  position: absolute;
+  top: -17%;
+  left: 133px;
+  margin-left: 0px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent var(--text-hover) transparent;
+}
+
+.nav-option__item-login:hover .menu-account {
+  display: block;
+  animation: fade 300ms ease forwards;
+  box-shadow: var(--text-hover) 0px 5px 15px;
+  z-index: 99999;
+}
+
+@keyframes fade {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.menu-account__item {
+  padding: 10px;
+  width: 100%;
+  height: 40px;
+  color: var(--text-dark);
+  font-size: 14px;
+  border-bottom: 1px solid var(--text-hover);
 }
 </style>
