@@ -1,5 +1,5 @@
 <template>
-  <div class="list-product">Checkout code o day</div>
+  <div class="list-product">Thanh toán cả giỏ hàng</div>
 </template>
 
 <script>
