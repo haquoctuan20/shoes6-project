@@ -25,6 +25,7 @@
               <span class="toggle-category" @click="hidden_collection">+</span>
               <transition name="fade">
                 <ul v-if="hiddenCollection">
+                  cls
                   <li>Mid Waterproof</li>
                   <li>Brogue shoe</li>
                   <li>Firecamp</li>
