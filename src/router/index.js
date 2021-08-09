@@ -26,7 +26,7 @@ const routes = [
     // giỏ hàng
     path: "/cart-detail",
     name: "CartDetail",
-    component: () => import("@/views/user/cart-detail-tanh/CartDetail.vue"),
+    component: () => import("@/views/user/cart-detail-tanh/DetailCart.vue"),
   },
   {
     // thanh toán

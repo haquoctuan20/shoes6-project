@@ -44,9 +44,13 @@
       </div>
 
       <router-link to="/cart-detail">
-        <div class="nav-option__item">
+        <div class="nav-option__item nav-option__item-login">
           <i class="fas fa-shopping-cart"></i>
           <span class="item-in-card">2</span>
+
+          <div class="menu-cart-item">
+            <Cart />
+          </div>
         </div>
       </router-link>
     </div>
@@ -54,7 +58,12 @@
 </template>
 
 <script>
+import Cart from "@/views/user/cart-tanh/Cart.vue";
+
 export default {
+  components: {
+    Cart,
+  },
   data: () => ({
     listCollection: ["Thể thao", "Leo núi", "Boots", "Oxford"],
   }),
@@ -145,6 +154,14 @@ a {
   width: 180px;
   background-color: #fff;
 }
+.nav-option__item-login .menu-cart-item {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  background-color: #fff;
+  z-index: 99999;
+}
 
 .nav-option__item-login .menu-account::after {
   content: "";
@@ -158,6 +175,13 @@ a {
 }
 
 .nav-option__item-login:hover .menu-account {
+  display: block;
+  animation: fade 300ms ease forwards;
+  box-shadow: var(--text-hover) 0px 5px 15px;
+  z-index: 99999;
+}
+
+.nav-option__item-login:hover .menu-cart-item {
   display: block;
   animation: fade 300ms ease forwards;
   box-shadow: var(--text-hover) 0px 5px 15px;
