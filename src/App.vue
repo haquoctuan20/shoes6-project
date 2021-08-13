@@ -80,6 +80,7 @@ export default {
   --btn-text-hover: #eefbfb;
 
   /* transition */
+  --tran02: ease 0.2s;
   --tran03: ease-in-out 0.3s;
   --tran06: ease-in-out 0.6s;
 }

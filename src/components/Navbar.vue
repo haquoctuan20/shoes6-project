@@ -120,7 +120,7 @@ a {
 .nav-option__item {
   cursor: pointer;
   font-size: 20px;
-  padding-left: 10px;
+  padding-left: 20px;
   position: relative;
 }
 .nav-option__item:hover {
