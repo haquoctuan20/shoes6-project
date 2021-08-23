@@ -33,12 +33,7 @@
         <div class="price title">
           <p>GIÁ NIÊM YẾT:</p>
           <p>
-            {{
-              product.originPrice.toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })
-            }}
+            {{ product.originPrice }}
           </p>
         </div>
         <div class="priceSale title material">

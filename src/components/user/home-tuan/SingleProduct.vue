@@ -59,7 +59,7 @@ export default {
      * đang fix cứng id = 1
      */
     viewDetail() {
-      this.$router.push("/list-product/123");
+      this.$router.push("/list-product/" + this.product.slug);
     },
   },
 };
@@ -104,7 +104,7 @@ export default {
 
 .product-name {
   width: 100%;
-  height: 50px;
+  height: 60px;
   font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
@@ -115,7 +115,7 @@ export default {
 
 .product-bottom {
   width: 100%;
-  height: 40px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
