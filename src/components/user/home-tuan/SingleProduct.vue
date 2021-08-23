@@ -4,16 +4,34 @@
     <div @click="viewDetail">
       <img
         class="product-img"
-        src="https://cdn.shopify.com/s/files/1/1811/9799/products/shoe19.jpg?v=1494313857"
+        :src="require('@/assets'.concat(product.avatar))"
         alt=""
       />
     </div>
     <div class="product-detail">
       <!-- name -->
-      <h2 class="product-name" @click="viewDetail">Shoe</h2>
+      <h2 class="product-name" @click="viewDetail">{{ product.name }}</h2>
       <!-- price - buy -->
       <div class="product-bottom">
-        <div class="product-price">1.000.000 vnd</div>
+        <div>
+          <div class="product-price">
+            {{
+              product.salePrice.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })
+            }}
+          </div>
+
+          <div class="star">
+            <div v-for="index in product.rate" :key="index">
+              <img src="@/assets/img/icon/star1.png" alt="" />
+            </div>
+            <div v-for="index in 5 - product.rate" :key="'A' + index">
+              <img src="@/assets/img/icon/star.png" alt="" />
+            </div>
+          </div>
+        </div>
 
         <button class="button-buy-product" @click="addToCart">
           <i class="fas fa-shopping-cart"></i>
@@ -25,6 +43,9 @@
 
 <script>
 export default {
+  props: {
+    product: Object,
+  },
   methods: {
     /**
      * Thêm vào giỏ hàng và chuyển màn hinh đến trang checkout
@@ -45,6 +66,13 @@ export default {
 </script>
 
 <style>
+.star {
+  display: flex;
+}
+.v-slide-group__content {
+  white-space: normal !important;
+}
+
 .single-product {
   width: 200px;
   transition: var(--tran03);
@@ -76,10 +104,9 @@ export default {
 
 .product-name {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
   text-transform: uppercase;
   text-align: center;
   padding: 0px 10px;

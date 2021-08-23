@@ -43,16 +43,14 @@
         </div>
       </div>
 
-      <router-link to="/cart-detail">
-        <div class="nav-option__item nav-option__item-login">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="item-in-card">2</span>
+      <div class="nav-option__item nav-option__item-login">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="item-in-card">2</span>
 
-          <div class="menu-cart-item">
-            <Cart />
-          </div>
+        <div class="menu-cart-item">
+          <Cart />
         </div>
-      </router-link>
+      </div>
     </div>
   </nav>
 </template>

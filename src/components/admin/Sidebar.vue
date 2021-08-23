@@ -12,85 +12,87 @@
         <router-link
           tag="div"
           class="sidebar-item"
-          :class="{ active: tabActive === 'admin' }"
+          exact
+          :class="{ tabActiveClass: tabActive === 'admin' }"
           to="/admin"
         >
           <i class="fas fa-store-alt"></i> Tổng quan
         </router-link>
       </div>
 
-      <div @click="setActive('2')">
+      <div @click="setActive('categories')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-list-products"
-          :class="{ active: tabActive === '2' }"
+          exact
+          to="/admin/categories"
+          :class="{ tabActiveClass: tabActive === 'categories' }"
         >
           <i class="fas fa-list"></i> Danh mục
         </router-link>
       </div>
 
-      <div @click="setActive('3')">
+      <div @click="setActive('products')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-don-hang"
-          :class="{ active: tabActive === '3' }"
+          to="/admin/products"
+          :class="{ tabActiveClass: tabActive === 'products' }"
         >
           <i class="fas fa-shoe-prints"></i> Sản phẩm
         </router-link>
       </div>
 
-      <div @click="setActive('4')">
+      <div @click="setActive('orders')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-don-hang"
-          :class="{ active: tabActive === '4' }"
+          to="/admin/orders"
+          :class="{ tabActiveClass: tabActive === 'orders' }"
         >
           <i class="fas fa-shopping-basket"></i> Đơn hàng
         </router-link>
       </div>
 
-      <div @click="setActive('5')">
+      <div @click="setActive('customers')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-don-hang"
-          :class="{ active: tabActive === '5' }"
+          to="/admin/customers"
+          :class="{ tabActiveClass: tabActive === 'customers' }"
         >
           <i class="fas fa-users"></i> Khách hàng
         </router-link>
       </div>
 
-      <div @click="setActive('6')">
+      <div @click="setActive('order-refund')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-don-hang"
-          :class="{ active: tabActive === '6' }"
+          to="/admin/order-refund"
+          :class="{ tabActiveClass: tabActive === 'order-refund' }"
         >
           <i class="fas fa-bullhorn"></i> Danh sách hoàn trả
         </router-link>
       </div>
 
-      <div @click="setActive('7')">
+      <div @click="setActive('stores')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-don-hang"
-          :class="{ active: tabActive === '7' }"
+          to="/admin/stores"
+          :class="{ tabActiveClass: tabActive === 'stores' }"
         >
-          <i class="fas fa-balance-scale-left"></i> Kho
+          <i class="fas fa-balance-scale-left"></i> Danh sách kho
         </router-link>
       </div>
 
-      <div @click="setActive('8')">
+      <div @click="setActive('report')">
         <router-link
           tag="div"
           class="sidebar-item"
-          to="/admin/management-don-hang"
-          :class="{ active: tabActive === '8' }"
+          to="/admin/report"
+          :class="{ tabActiveClass: tabActive === 'report' }"
         >
           <i class="fas fa-chart-line"></i> Báo cáo
         </router-link>
@@ -163,7 +165,7 @@ export default {
   color: var(--text-light);
 }
 
-.active {
+.tabActiveClass {
   background: var(--background-dark) !important;
   color: var(--text-light);
   font-weight: 500;

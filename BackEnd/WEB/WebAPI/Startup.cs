@@ -32,6 +32,20 @@ namespace WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
+
+            //AddCors
+            services.AddCors(options =>
+            {
+
+                options.AddPolicy("SHOES_PROJECT",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:44380/")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod()
+                                            .AllowAnyOrigin();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +61,9 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //UseCors
+            app.UseCors();
 
             app.UseAuthorization();
 

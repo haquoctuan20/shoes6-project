@@ -18,7 +18,7 @@
 
     <!-- san pham moi -->
 
-    <ListNewProduct />
+    <ListNewProduct :listNewProduct="listNewProduct" />
 
     <!-- parallax -->
     <v-app>
@@ -57,20 +57,23 @@
       <div class="container-sellers">
         <p
           class="item-seller"
-          v-for="(item, index) in listFeature"
+          :class="{ 'item-seller--active': item === typeActive }"
+          v-for="(item, index) in listType"
           :key="index"
+          @click="activeListBestSheller(item)"
         >
           {{ item }}
         </p>
       </div>
 
+      <!-- danh sách best sellers -->
       <div class="container-product-sellers">
         <div
           class="item-product-sellers"
-          v-for="(item, index) in 10"
+          v-for="(item, index) in listShoesBestSeller"
           :key="index"
         >
-          <SingleProduct />
+          <SingleProduct :product="item" />
         </div>
       </div>
     </div>
@@ -127,7 +130,6 @@ export default {
   components: { ListNewProduct, SingleProduct },
 
   data: () => ({
-    listFeature: ["Tất cả", "Khuyến mại", "Bán chạy", "Mới"],
     isActive: false,
     items_carousel: [
       {
@@ -161,18 +163,38 @@ export default {
           "https://cdn.shopify.com/s/files/1/1811/9799/files/shoe8-2_b0f8ccfb-d5d1-4ba5-b412-92227077ed0f.png?v=1494423683",
       },
     ],
+
+    listCategory: [],
+    listShoes: [],
+    listNewProduct: [],
+    listShoesBestSeller: [],
+    listType: [],
+    typeActive: null,
   }),
   methods: {
     openListProduct() {
       this.$router.push("/list-product");
     },
 
-    async getData() {
+    async getProductData() {
       try {
-        const response = await axios.get(
-          "https://localhost:44380/category/all"
+        const response = await axios.get("https://localhost:44380/product/all");
+        // console.log(response.data);
+        this.listShoes = response.data;
+        console.log(this.listShoes);
+
+        // lay danh sach giay moi
+        this.listNewProduct = this.listShoes.filter(
+          (item) => item.type === "MỚI"
         );
-        console.log(response);
+
+        // lay danh sach type
+        this.listType = new Set(this.listShoes.map((item) => item.type));
+        this.listType = Array.from(this.listType);
+        this.typeActive = this.listType[0];
+
+        // list best seller
+        this.activeListBestSheller(this.typeActive);
       } catch (error) {
         console.error(error);
       }
@@ -182,10 +204,19 @@ export default {
       this.$store.dispatch("closeLayoutAdmin");
       console.log("Thoát admin");
     },
+
+    activeListBestSheller(item) {
+      // lay danh sach type
+      this.typeActive = item;
+      this.listShoesBestSeller = this.listShoes.filter(
+        (item) => item.type === this.typeActive
+      );
+    },
   },
 
   created() {
-    this.getData();
+    this.getProductData();
+
     this.closeLayoutAdmin();
   },
 };
@@ -273,6 +304,11 @@ export default {
   opacity: 0.3;
 }
 .item-seller:hover {
+  opacity: 1;
+  color: var(--btn-hover);
+}
+
+.item-seller--active {
   opacity: 1;
   color: var(--btn-hover);
 }

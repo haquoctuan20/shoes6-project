@@ -35,28 +35,66 @@ const routes = [
     component: () => import("@/views/user/checkout-tanh/Checkout.vue"),
   },
 
+  // ============== ADMIN =================
+
   {
     // Trang chủ admin
     path: "/admin",
     name: "Admin",
 
     component: () => import("@/views/admin/AdminApp.vue"),
-    children: [
-      {
-        // quan ly san pham
-        path: "/management-list-products",
-        name: "MListProducts",
-        component: () => import("@/views/admin/MListProducts.vue"),
-      },
-      {
-        // Quản lý đơn hàng
-        path: "/management-don-hang",
-        name: "MDonHang",
-
-        component: () => import("@/views/admin/MDonHang.vue"),
-      },
-    ],
   },
+  {
+    // Quan ly danh muc san pham
+    path: "/admin/categories",
+    name: "Categories",
+
+    component: () => import("@/views/admin/Categories.vue"),
+  },
+  {
+    // Quan ly san pham
+    path: "/admin/products",
+    name: "Products",
+
+    component: () => import("@/views/admin/Products.vue"),
+  },
+  {
+    // Quan ly don hang
+    path: "/admin/orders",
+    name: "Orders",
+
+    component: () => import("@/views/admin/Orders.vue"),
+  },
+  {
+    // Quan ly khach hang
+    path: "/admin/customers",
+    name: "Customers",
+
+    component: () => import("@/views/admin/Customers.vue"),
+  },
+  {
+    // Quan ly don hang hoan tra
+    path: "/admin/order-refund",
+    name: "OrderRefund",
+
+    component: () => import("@/views/admin/OrderRefund.vue"),
+  },
+  {
+    // Quan ly danh sach kho hang
+    path: "/admin/stores",
+    name: "Stores",
+
+    component: () => import("@/views/admin/Stores.vue"),
+  },
+  {
+    // Quan ly bao cao hang thang
+    path: "/admin/report",
+    name: "Report",
+
+    component: () => import("@/views/admin/Report.vue"),
+  },
+
+  // =========== LOGIN ================
 
   {
     // Đăng nhập

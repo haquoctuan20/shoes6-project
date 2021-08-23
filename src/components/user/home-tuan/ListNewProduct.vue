@@ -5,12 +5,12 @@
     </div>
 
     <v-app>
-      <v-sheet class="mx-auto" max-width="100%">
+      <v-sheet class="mx-auto" max-width="90%">
         <v-slide-group class="pa-4" show-arrows>
-          <v-slide-item v-for="(item, index) in list_new_product" :key="index">
+          <v-slide-item v-for="(item, index) in listNewProduct" :key="index">
             <!-- product -->
 
-            <SingleProduct />
+            <SingleProduct :product="item" />
           </v-slide-item>
         </v-slide-group>
       </v-sheet>
@@ -24,37 +24,11 @@ import SingleProduct from "./SingleProduct.vue";
 export default {
   components: { SingleProduct },
 
-  data: () => ({
-    list_new_product: [
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-      {
-        name: "name",
-      },
-    ],
-  }),
+  props: {
+    listNewProduct: Array,
+  },
+
+  data: () => ({}),
 };
 </script>
 

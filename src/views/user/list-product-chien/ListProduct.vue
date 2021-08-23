@@ -25,7 +25,6 @@
               <span class="toggle-category" @click="hidden_collection">+</span>
               <transition name="fade">
                 <ul v-if="hiddenCollection">
-                  cls
                   <li>Mid Waterproof</li>
                   <li>Brogue shoe</li>
                   <li>Firecamp</li>
@@ -149,11 +148,11 @@
             </div>
             <ul class="values" v-if="hiddenValuesSort" v-on:click="selectValue">
               <li
-                v-for="item in valueSelect"
-                :value="item.value"
-                :key="item.value"
+                v-for="itemSelect in valueSelect"
+                :value="itemSelect.value"
+                :key="itemSelect.value"
               >
-                {{ item.text }}
+                {{ itemSelect.text }}
               </li>
             </ul>
           </div>
@@ -162,7 +161,12 @@
         <!-- Danh sách sản phẩm -->
         <div class="listProduct">
           <ul>
-            <li class="product" v-for="item in products" :key="item.text">
+            <li
+              class="product"
+              v-for="item in products"
+              :key="item.id"
+              @click="viewDetail(item)"
+            >
               <div>
                 <!-- filter nền khi hover vào ảnh -->
                 <span id="filterProduct">
@@ -179,10 +183,14 @@
                 <!-- Hình ảnh chính và phụ -->
                 <div>
                   <span id="positionImage">
-                    <img id="mainImage" :src="item.linkImageProduct" alt="" />
+                    <img
+                      id="mainImage"
+                      :src="require('../../../assets'.concat(item.avatar))"
+                      alt=""
+                    />
                     <img
                       id="extraImage"
-                      :src="item.linkImageProductPlus"
+                      :src="require('../../../assets'.concat(item.avatar))"
                       alt=""
                     />
                   </span>
@@ -191,17 +199,24 @@
               <!-- Detail sản phẩm -->
               <div class="productDetail">
                 <p class="nameProduct">
-                  {{ item.text }}
+                  {{ item.name }}
                 </p>
                 <div>
                   <div class="costProduct">
-                    <p>$ {{ item.cost }}</p>
+                    <p>
+                      {{
+                        item.salePrice.toLocaleString("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        })
+                      }}
+                    </p>
                     <!-- Sao đánh giá -->
                     <div class="star">
-                      <div v-for="index in item.star" :key="index">
+                      <div v-for="index in item.rate" :key="index">
                         <img src="../../../assets/img/icon/star1.png" alt="" />
                       </div>
-                      <div v-for="index in 5 - item.star" :key="index">
+                      <div v-for="index in 5 - item.rate" :key="'A' + index">
                         <img src="../../../assets/img/icon/star.png" alt="" />
                       </div>
                     </div>
@@ -220,8 +235,20 @@
 </template>
 
 <script>
+// import { eventBus } from '../../../main.js';
+import * as axios from "axios";
 export default {
+  created() {
+    this.getData();
+  },
   methods: {
+    // Lấy giữu liệu từ API
+    async getData() {
+      const response = await axios.get("https://localhost:44380/product/all");
+      this.products = response.data;
+      console.log(response.data);
+    },
+
     // Sự kiện ấn hiện option
     hidden_collection(e) {
       this.hiddenCollection = !this.hiddenCollection;
@@ -265,6 +292,46 @@ export default {
     selectValue: function(e) {
       this.valueSelected = e.target.innerText;
       this.hiddenValuesSort = !this.hiddenValuesSort;
+      switch (this.valueSelected) {
+        // sắp xếp theo giá tăng dần
+        case "Price, low to hight":
+          this.products.sort((a, b) => a.salePrice - b.salePrice);
+          break;
+        // Sắp xếp theo giá giảm dần
+        case "Price, hight to low":
+          this.products.sort((a, b) => b.salePrice - a.salePrice);
+          break;
+        // Sắp xếp tên sản phẩm theo A -> Z
+        case "A-Z":
+          this.products.sort(function(a, b) {
+            var typeA = a.name.toUpperCase();
+            var typeB = b.name.toUpperCase();
+            if (typeA > typeB) {
+              return 1;
+            } else if (typeA < typeB) {
+              return -1;
+            } else return 0;
+          });
+          break;
+        // Sắp xếp tên sản phẩm theo Z -> A
+        case "Z-A":
+          this.products.sort(function(a, b) {
+            var typeA = a.name.toUpperCase();
+            var typeB = b.name.toUpperCase();
+            if (typeA < typeB) {
+              return 1;
+            } else if (typeA > typeB) {
+              return -1;
+            } else return 0;
+          });
+          break;
+        default:
+          break;
+      }
+    },
+
+    viewDetail(item) {
+      this.$router.push("/list-product/" + item.slug);
     },
   },
 
@@ -286,80 +353,8 @@ export default {
         { text: "Best Selling", value: "bestSelling" },
       ],
       valueSelected: "Featured",
-      products: [
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "106.00",
-          star: 2,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "160.00",
-          star: 3,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "189.00",
-          star: 5,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "199.00",
-          star: 3,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "106.00",
-          star: 1,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "106.00",
-          star: 3,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "106.00",
-          star: 0,
-        },
-        {
-          text: "TỔ ONG",
-          linkImageProduct:
-            "https://cf.shopee.vn/file/2727c633dc6d296510dee58d61ff5cd9",
-          linkImageProductPlus:
-            "https://cf.shopee.vn/file/fe3909de2221c995d26da63b6d09e504",
-          cost: "106.00",
-          star: 3,
-        },
-      ],
+      products: [],
+      productSelected: [],
     };
   },
 };
@@ -373,7 +368,6 @@ export default {
 
 .content {
   display: flex;
-  /* position: relative; */
 }
 
 .title-page {
@@ -696,6 +690,7 @@ export default {
 .productDetail .nameProduct {
   font-weight: bold;
   font-size: 21px;
+  height: 80px;
   padding-top: 25px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e4e4e4;

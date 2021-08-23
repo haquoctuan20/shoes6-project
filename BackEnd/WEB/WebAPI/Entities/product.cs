@@ -9,6 +9,8 @@ namespace WebAPI.Entities
     {
         public string ID { get; set; }
 
+        public string Avatar { get; set; }
+
         public string Name { get; set; }
 
         public string Slug { get; set; }
@@ -25,7 +27,7 @@ namespace WebAPI.Entities
 
         public double SalePrice { get; set; }
 
-        public int Qunatity { get; set; }
+        public int Quantity { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

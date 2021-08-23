@@ -262,19 +262,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\haquo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OpenSourceSoftware\\Nhom6\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "D:\\OpenSourceSoftware\\Nhom6\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\OpenSourceSoftware\\Nhom6\\BackEnd\\WEB\\WebAPI\\obj\\",
+      "projectPath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\haquo\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\haquo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -331,7 +331,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
