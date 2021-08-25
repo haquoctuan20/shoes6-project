@@ -1,7 +1,7 @@
 <template>
   <!-- https://huge-shoes.myshopify.com/ -->
 
-  <ul>
+  <div>
     <div class="hasCart" v-if="listProducts.length">
       <div class="view-item">
         <cart-item
@@ -19,7 +19,7 @@
 
       <li class="cart-total">
         CART TOTAL: &nbsp;&nbsp; <span class="total">${{ cartTotal }} USD</span>
-        <div class="btn">
+        <div class="container-btn-cart">
           <button class="btn-checkout" @click="openCheckout">
             <i class="far fa-check-circle"> &nbsp;&nbsp; CHECK OUT</i>
           </button>
@@ -34,7 +34,7 @@
         Your cart is currently empty!
       </li>
     </div>
-  </ul>
+  </div>
 </template>
 
 <script>
@@ -138,7 +138,7 @@ li {
   width: 100%;
 }
 
-.btn {
+.container-btn-cart {
   display: flex;
 }
 
@@ -153,27 +153,27 @@ li {
   color: #571f9c;
 }
 
-.cart-total .btn {
+.cart-total .container-btn-cart {
   margin-top: 30px;
   text-align: center;
 }
 
-.cart-total .btn button {
+.cart-total .container-btn-cart button {
   width: 140px;
   height: 42px;
-  background: black;
-  color: black;
+  background: var(--btn-default);
+  color: var(--text-light);
   font-weight: 300;
   font-size: 14px;
   text-align: center;
+  transition: var(--tran03);
 }
 
-.cart-total .btn button:hover {
-  background: #571f9c;
-  color: white;
+.cart-total .container-btn-cart button:hover {
+  background: var(--btn-hover);
 }
 
-.cart-total .btn .btn-checkout {
+.cart-total .container-btn-cart .btn-checkout {
   margin-left: 28px;
   margin-right: 10px;
 }

@@ -1,28 +1,26 @@
 <template>
-  <li>
-    <div class="item">
-      <div class="product-image">
-        <a href="" v-bind:title="title"
-          ><img src="../../../assets/img/shoe1.jpg"
-        /></a>
+  <div class="item-cart-item">
+    <div class="product-image">
+      <a href="" v-bind:title="title"
+        ><img src="../../../assets/img/shoe1.jpg"
+      /></a>
+    </div>
+    <div class="product-detail">
+      <div class="title">
+        <a href="">{{ title }} / {{ size }} / {{ material }}</a>
       </div>
-      <div class="product-detail">
-        <div class="title">
-          <a href="">{{ title }} / {{ size }} / {{ material }}</a>
-        </div>
-        <div class="quantity-price">
-          <span class="quantity">{{ quantity }}</span>
-          <span> x </span>
-          <span class="price"> ${{ price }} USD </span>
-        </div>
-      </div>
-      <div class="delete-product">
-        <a href="#" title="Remove This Item" v-on:click.prevent="deleteItem(id)"
-          ><div><i class="fas fa-times"></i></div
-        ></a>
+      <div class="quantity-price">
+        <span class="quantity">{{ quantity }}</span>
+        <span> x </span>
+        <span class="price"> ${{ price }} USD </span>
       </div>
     </div>
-  </li>
+    <div class="delete-product">
+      <a href="#" title="Remove This Item" v-on:click.prevent="deleteItem(id)"
+        ><div><i class="fas fa-times"></i></div
+      ></a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,9 +36,11 @@ export default {
 </script>
 
 <style scoped>
-.item {
+.item-cart-item {
   display: flex;
   width: 100%;
+  align-items: center;
+  border-bottom: 1px solid #bbb;
 }
 
 .product-image img {
