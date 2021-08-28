@@ -1,7 +1,7 @@
 <template>
   <div class="cart-detail">
     <div class="top">
-      <h5 style="font-weight: bold;">YOUR SHOPPING CART</h5>
+      <h5 style="font-weight: bold;">GIỎ HÀNG CỦA BẠN</h5>
       <div style="font-size: 14px; margin-top: 10px;">
         <span>Home</span>
         <span>&ensp;/&ensp;</span>
