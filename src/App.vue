@@ -85,6 +85,10 @@ export default {
   --tran06: ease-in-out 0.6s;
 }
 
+a {
+  color: var(--text-dark) !important;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -107,15 +111,6 @@ body {
 .content-admin-app {
   width: calc(100% - 220px);
   height: 100vh;
-}
-/* css button */
-.btn {
-  padding: 14px 40px;
-  background-color: var(--btn-default);
-}
-.btn:hover {
-  background-color: var(--btn-hover);
-  transition: var(--tran03);
 }
 
 .slide-leave-active {

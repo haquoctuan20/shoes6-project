@@ -1,9 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { store } from "../store/store.js";
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "*", redirect: "/" },
   {
     path: "/",
     name: "Home",
@@ -43,6 +45,12 @@ const routes = [
     name: "Admin",
 
     component: () => import("@/views/admin/AdminApp.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly danh muc san pham

@@ -1,7 +1,7 @@
 <template>
   <!-- https://huge-shoes.myshopify.com/ -->
 
-  <div>
+  <ul>
     <div class="hasCart" v-if="listProducts.length">
       <div class="view-item">
         <cart-item
@@ -19,22 +19,23 @@
 
       <li class="cart-total">
         CART TOTAL: &nbsp;&nbsp; <span class="total">${{ cartTotal }} USD</span>
-        <div class="container-btn-cart">
-          <button class="btn-checkout" @click="openCheckout">
-            <i class="far fa-check-circle"> &nbsp;&nbsp; CHECK OUT</i>
+        <div class="btn-cart">
+          <button class="btn-checkout btn-cart__item" @click="openCheckout">
+            <i class="fas fa-check-circle"> </i>
+            <span>THANH TOÁN</span>
           </button>
-          <button class="btn-viewcart" @click="openCartDetail">
-            <i class="far fa-shopping-cart"> &nbsp;&nbsp; VIEW CART</i>
+          <button class="btn-viewcart btn-cart__item" @click="openCartDetail">
+            <i class="fas fa-shopping-cart"></i> <span>GIỎ HÀNG</span>
           </button>
         </div>
       </li>
     </div>
     <div v-else>
       <li class="empty-cart">
-        Your cart is currently empty!
+        Giỏ hàng của bạn đang trống!
       </li>
     </div>
-  </div>
+  </ul>
 </template>
 
 <script>
@@ -45,49 +46,52 @@ export default {
   components: { CartItem },
 
   data: () => ({
-    listProducts: [
-      {
-        id: "1",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 1,
-        price: 756,
-        image: "../../../assets/img/shoe1.jpg",
-      },
-      {
-        id: "2",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 2,
-        price: 756,
-        image: "../../../assets/img/shoe1.jpg",
-      },
-      {
-        id: "3",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 3,
-        price: 756,
-        image: "../../../assets/img/shoe1.jpg",
-      },
-      {
-        id: "4",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 4,
-        price: 756,
-        image: "../../../assets/img/shoe1.jpg",
-      },
-    ],
+    // listProducts: [
+    //   {
+    //     id: "1",
+    //     title: "Derby shoe - sandal",
+    //     size: 7,
+    //     material: "rubber",
+    //     quantity: 1,
+    //     price: 756,
+    //     image: "shoe2.jpg",
+    //   },
+    //   {
+    //     id: "2",
+    //     title: "Derby shoe - sandal",
+    //     size: 7,
+    //     material: "rubber",
+    //     quantity: 2,
+    //     price: 756,
+    //     image: "shoe1.jpg",
+    //   },
+    //   {
+    //     id: "3",
+    //     title: "Derby shoe - sandal",
+    //     size: 7,
+    //     material: "rubber",
+    //     quantity: 3,
+    //     price: 756,
+    //     image: "shoe1.jpg",
+    //   },
+    //   {
+    //     id: "4",
+    //     title: "Derby shoe - sandal",
+    //     size: 7,
+    //     material: "rubber",
+    //     quantity: 4,
+    //     price: 756,
+    //     image: "shoe1.jpg",
+    //   },
+    // ],
   }),
 
   computed: {
+    listProducts() {
+      return this.$store.state.listProducts;
+    },
     cartTotal() {
-      return this.listProducts
+      return this.$store.state.listProducts
         .map((item) => item.price * item.quantity)
         .reduce((total, amount) => total + amount);
     },
@@ -95,7 +99,9 @@ export default {
 
   methods: {
     deleteItem(proId) {
-      const index = this.listProducts.findIndex((item) => item.id === proId);
+      const index = this.$store.state.listProducts.findIndex(
+        (item) => item.id === proId
+      );
       this.listProducts.splice(index, 1);
     },
 
@@ -117,12 +123,12 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css");
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
 ul {
   width: 350px;
   border-top: 1px solid rgb(241, 237, 237);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-
-  margin-bottom: 200px;
 }
 
 .hasCart {
@@ -130,16 +136,17 @@ ul {
 }
 
 .view-item {
-  max-height: 400px;
-  overflow: auto;
+  max-height: 340px;
+  overflow-y: auto;
 }
 
 li {
   width: 100%;
 }
 
-.container-btn-cart {
+.btn-cart {
   display: flex;
+  margin-top: 10px;
 }
 
 .cart-total {
@@ -147,18 +154,19 @@ li {
   font-size: 18px;
   text-align: center;
   padding-bottom: 10px;
+  font-family: "Roboto", sans-serif !important;
 }
 
 .cart-total .total {
   color: #571f9c;
 }
 
-.cart-total .container-btn-cart {
+.cart-total .btbtn-cartn {
   margin-top: 30px;
   text-align: center;
 }
 
-.cart-total .container-btn-cart button {
+.cart-total .btn-cart button {
   width: 140px;
   height: 42px;
   background: var(--btn-default);
@@ -169,11 +177,11 @@ li {
   transition: var(--tran03);
 }
 
-.cart-total .container-btn-cart button:hover {
+.cart-total .btn-cart button:hover {
   background: var(--btn-hover);
 }
 
-.cart-total .container-btn-cart .btn-checkout {
+.cart-total .btn-cart .btn-checkout {
   margin-left: 28px;
   margin-right: 10px;
 }
@@ -181,5 +189,13 @@ li {
 .empty-cart {
   font-size: 14px;
   padding: 15px 25px;
+}
+
+.btn-cart__item > span {
+  font-weight: 500;
+}
+
+.btn-cart__item > i {
+  padding-right: 10px;
 }
 </style>

@@ -41,7 +41,9 @@
                 GIẢM NGAY <span>50%</span> <br />CHO
                 <span>LẦN MUA ĐẦU TIÊN</span>
               </p>
-              <button class="btn" @click="openListProduct">Mua ngay</button>
+              <button class="btn-shopnow" @click="openListProduct">
+                Mua ngay
+              </button>
             </div>
           </div>
         </v-parallax>
@@ -181,7 +183,7 @@ export default {
         const response = await axios.get("https://localhost:44380/product/all");
         // console.log(response.data);
         this.listShoes = response.data;
-        console.log(this.listShoes);
+        // console.log(this.listShoes);
 
         // lay danh sach giay moi
         this.listNewProduct = this.listShoes.filter(
@@ -256,9 +258,20 @@ export default {
 .parallax-title span {
   color: #f01133;
 }
-.btn {
+/* css button */
+
+.btn-shopnow {
   letter-spacing: 2px;
   text-transform: uppercase;
+}
+
+.btn-shopnow {
+  padding: 14px 40px;
+  background-color: var(--btn-default);
+}
+.btn-shopnow:hover {
+  background-color: var(--btn-hover);
+  transition: var(--tran03);
 }
 
 /* best seller */

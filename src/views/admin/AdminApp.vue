@@ -5,19 +5,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   components: {},
 
   methods: {
-    closeLayoutAdmin() {
-      this.$store.dispatch("closeLayoutAdmin");
-      console.log("Thoát admin");
-    },
-
-    openLayoutAdmin() {
-      this.$store.commit("openLayoutAdmin");
-      console.log("Vào admin");
-    },
+    ...mapActions(["closeLayoutAdmin", "openLayoutAdmin"]),
   },
 
   created() {

@@ -3,12 +3,31 @@
     <h2 class="login-title">ĐĂNG NHẬP</h2>
     <div class="login-form">
       <v-form>
-        <v-text-field label="Email" placeholder="...@gmail.com"></v-text-field>
-        <v-text-field label="Mật khẩu" placeholder="********"></v-text-field>
+        <v-text-field
+          ref="email"
+          label="Email"
+          placeholder="...@gmail.com"
+          v-model="email"
+        ></v-text-field>
+        <v-text-field
+          label="Mật khẩu"
+          v-model="password"
+          :rules="[rules.required, rules.min]"
+          :type="show1 ? 'text' : 'password'"
+          name="input-10-1"
+          counter
+          @click:append="show1 = !show1"
+        ></v-text-field>
       </v-form>
     </div>
 
     <div class="container-btn-login">
+      <div>
+        <button class="btn btn-login-account" @click="openAfterLogin">
+          Đăng nhập
+        </button>
+      </div>
+
       <!-- Quen mật khẩu -->
       <div>
         <router-link to="/reset-password">
@@ -16,12 +35,6 @@
             Quên mật khẩu?
           </p>
         </router-link>
-      </div>
-
-      <div>
-        <button class="btn btn-login-account" @click="openAfterLogin">
-          Đăng nhập
-        </button>
       </div>
 
       <!-- Tao tai khoan -->
@@ -46,11 +59,53 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
-  methods: {
-    openAfterLogin() {
-      this.$router.push("/admin");
+  computed: {
+    ...mapGetters(["userLogin"]),
+  },
+  data: () => ({
+    show1: false,
+    rules: {
+      required: (value) => !!value || "Required.",
+      min: (v) => v.length >= 8 || "Ít nhất 8 ký tự",
     },
+
+    email: "",
+    password: "",
+    userLoging: {},
+  }),
+  methods: {
+    ...mapActions(["getUsers", "closeLayoutAdmin", "saveUserLogin"]),
+
+    openAfterLogin() {
+      if (this.email.trim() === "" || this.password.trim() === "") {
+        alert("Nhập email, mật khẩu!");
+        this.$refs.email.focus();
+      } else {
+        const users = this.$store.getters.users;
+        this.userLoging = users.filter(
+          (u) => u.email === this.email && u.password === this.password
+        );
+        console.log(this.userLoging);
+        if (this.userLoging.length > 0) {
+          this.saveUserLogin(this.userLoging[0]);
+          this.$router.push("/admin");
+        } else {
+          alert("Đăng nhập không thành công!");
+        }
+      }
+    },
+  },
+
+  created() {
+    // this.$store.dispatch("getUsers");
+    this.getUsers();
+  },
+
+  mounted() {
+    this.$refs.email.focus();
+    // this.closeLayoutAdmin();
   },
 };
 </script>

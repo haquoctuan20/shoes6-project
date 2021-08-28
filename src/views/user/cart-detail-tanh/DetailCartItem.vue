@@ -4,7 +4,9 @@
       <div class="product">
         <div class="image">
           <a href=""
-            ><img src="../../../assets/img/shoe2.jpg" alt="Bast shoe"
+            ><img
+              :src="require('../../../assets/img/'.concat(image))"
+              alt="Bast shoe"
           /></a>
         </div>
         <div class="title">
@@ -108,6 +110,13 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 19px;
   width: 50%;
   margin: auto;
+}
+
+.product .image img {
+  width: 240px;
+  height: 240px;
+  max-width: 240px;
+  max-height: 240px;
 }
 
 .product .title a,

@@ -1,26 +1,28 @@
 <template>
-  <div class="item-cart-item">
-    <div class="product-image">
-      <a href="" v-bind:title="title"
-        ><img src="../../../assets/img/shoe1.jpg"
-      /></a>
-    </div>
-    <div class="product-detail">
-      <div class="title">
-        <a href="">{{ title }} / {{ size }} / {{ material }}</a>
+  <li class="li-item">
+    <div class="item">
+      <div class="product-image">
+        <a href="" v-bind:title="title"
+          ><img :src="require('../../../assets/img/'.concat(image))"
+        /></a>
       </div>
-      <div class="quantity-price">
-        <span class="quantity">{{ quantity }}</span>
-        <span> x </span>
-        <span class="price"> ${{ price }} USD </span>
+      <div class="product-detail">
+        <div class="title">
+          <a href="">{{ title }} / {{ size }} / {{ material }}</a>
+        </div>
+        <div class="quantity-price">
+          <span class="quantity">{{ quantity }}</span>
+          <span> x </span>
+          <span class="price"> ${{ price }} USD </span>
+        </div>
+      </div>
+      <div class="delete-product">
+        <a href="#" title="Remove This Item" v-on:click.prevent="deleteItem(id)"
+          ><div><i class="fas fa-times"></i></div
+        ></a>
       </div>
     </div>
-    <div class="delete-product">
-      <a href="#" title="Remove This Item" v-on:click.prevent="deleteItem(id)"
-        ><div><i class="fas fa-times"></i></div
-      ></a>
-    </div>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -36,22 +38,23 @@ export default {
 </script>
 
 <style scoped>
-.item-cart-item {
+.item {
   display: flex;
   width: 100%;
   align-items: center;
-  border-bottom: 1px solid #bbb;
 }
 
 .product-image img {
   width: 90px;
   height: 90px;
+  max-width: 90px;
+  max-height: 90px;
   padding: 10px;
 }
 
 .product-detail {
   padding: 10px;
-  width: 220px;
+  width: 200px;
   font-size: 16px;
 }
 
@@ -69,15 +72,17 @@ export default {
   font-size: 14px;
 }
 
-li {
+.li-item {
   box-sizing: border-box;
-  width: 350px;
-  margin: 0px;
-  margin-top: 10px;
-  padding: 0px;
-  padding-bottom: 10px;
+  width: 100%;
+  padding: 10px 0px;
   list-style: none;
   border-bottom: 1px solid #ccc;
+  transition: var(--tran03);
+}
+
+.li-item:hover {
+  background: rgba(64, 185, 241, 0.15);
 }
 
 .delete-product {
