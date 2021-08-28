@@ -11,16 +11,12 @@ export default {
   components: {},
 
   methods: {
-    ...mapActions(["closeLayoutAdmin", "openLayoutAdmin"]),
+    ...mapActions([]),
   },
 
-  created() {
-    this.openLayoutAdmin();
-  },
+  created() {},
 
-  beforeDestroy() {
-    // this.closeLayoutAdmin();
-  },
+  beforeDestroy() {},
 };
 </script>
 

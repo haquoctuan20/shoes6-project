@@ -11,7 +11,10 @@
       <h6>Chúng tôi sẽ gửi cho bạn một email để đặt lại mật khẩu của bạn.</h6>
 
       <div>
-        <button class="btn btn-reset-password-account" @click="snackbar = true">
+        <button
+          class="btn-reset-pass btn-reset-password-account"
+          @click="snackbar = true"
+        >
           Gửi
         </button>
       </div>
@@ -85,6 +88,20 @@ export default {
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
+}
+
+.btn-reset-pass {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-reset-pass {
+  padding: 14px 40px;
+  background-color: var(--btn-default);
+}
+.btn-reset-pass:hover {
+  background-color: var(--btn-hover);
+  transition: var(--tran03);
 }
 
 .btn-reset-password-account {

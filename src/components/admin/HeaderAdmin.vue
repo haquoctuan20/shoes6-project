@@ -1,5 +1,27 @@
 <template>
   <div class="header-admin">
+    <div>
+      <v-app class="none-vapp">
+        <v-dialog v-model="dialog" persistent max-width="400">
+          <v-card>
+            <v-card-title class="text-h5">
+              Bạn có muốn đăng xuất ?
+            </v-card-title>
+            <v-card-text> </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                Hủy
+              </v-btn>
+              <v-btn color="green darken-1" text @click="LogoutUser">
+                Đăng xuất
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-app>
+    </div>
+
     <!-- left -->
     <div class="header-left">
       <router-link tag="h2" to="/">
@@ -19,14 +41,31 @@
       <i class="far fa-envelope"></i>
       <i class="fas fa-bell"></i>
       <i class="fas fa-cogs"></i>
-      <i class="fas fa-power-off"></i>
+      <i class="fas fa-power-off" @click="openLogoutUser"></i>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  data: () => ({}),
+  data: () => ({
+    dialog: false,
+  }),
+  methods: {
+    ...mapActions(["logoutUser", "getSnackBars"]),
+
+    openLogoutUser() {
+      this.dialog = true;
+    },
+
+    LogoutUser() {
+      this.dialog = false;
+      this.getSnackBars("Bạn vừa đăng xuất!");
+      this.logoutUser();
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
@@ -56,8 +95,7 @@ export default {
 }
 
 /* =============left============= */
-.header-left {
-}
+
 .header-left > h2 {
   display: flex;
   text-align: center;
@@ -100,6 +138,4 @@ export default {
 }
 
 /* ============== header right ================== */
-.header-right {
-}
 </style>

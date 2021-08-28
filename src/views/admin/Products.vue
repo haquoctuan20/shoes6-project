@@ -1,21 +1,219 @@
 <template>
   <div class="container-products-admin">
-    <v-simple-table>
+    <!-- dialog -->
+    <div>
+      <v-app class="none-vapp">
+        <v-dialog v-model="dialog" persistent max-width="500">
+          <v-card>
+            <v-card-title class="text-h5">
+              Bạn có muốn xóa sản phẩm: <br />
+              {{ productDelete.name }}?
+            </v-card-title>
+            <v-card-text>
+              {{ productDelete.name }}
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                Hủy
+              </v-btn>
+              <v-btn color="green darken-1" text @click="dialog = false">
+                Xóa
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-app>
+    </div>
+
+    <!-- button thêm mới -->
+    <v-btn class="mb-2" depressed color="primary">
+      Thêm mới
+    </v-btn>
+
+    <!-- form thêm mới, chi tiết -->
+    <div class="form-chitiet" v-if="Object.keys(productBySlug).length !== 0">
+      <!-- DONG SO 1 -->
+      <div class="form-rows">
+        <!-- avatar -->
+        <div class="form-col-row-1">
+          <img :src="require('@/assets'.concat(productBySlug.avatar))" alt="" />
+        </div>
+
+        <div class="form-col-row-1">
+          <img
+            :src="require('@/assets'.concat(productBySlug.avatarr))"
+            alt=""
+          />
+        </div>
+
+        <!-- COT SO 2 -->
+        <div class="form-col-row-1">
+          <v-text-field
+            label="ID sản phẩm"
+            v-model="productBySlug.id"
+            disabled
+            prepend-icon="mdi-group"
+          ></v-text-field>
+
+          <v-text-field
+            label="ID Category"
+            v-model="productBySlug.categoryID"
+          ></v-text-field>
+
+          <v-text-field
+            label="Tên sản phẩm"
+            v-model="productBySlug.name"
+          ></v-text-field>
+
+          <v-text-field
+            label="Slug sản phẩm"
+            v-model="productBySlug.slug"
+          ></v-text-field>
+
+          <v-text-field
+            label="Chất liệu sản phẩm"
+            v-model="productBySlug.material"
+          ></v-text-field>
+        </div>
+
+        <!-- COT SO 3 -->
+        <div class="form-col-row-1">
+          <v-text-field
+            label="Đánh giá sao"
+            v-model="productBySlug.rate"
+            disabled
+          ></v-text-field>
+
+          <v-text-field
+            label="Số lượng còn"
+            v-model="productBySlug.quantity"
+          ></v-text-field>
+
+          <v-text-field label="Giá gốc" v-model="originPrice"></v-text-field>
+
+          <v-text-field label="Giá đang bán" v-model="salePrice"></v-text-field>
+
+          <v-text-field
+            label="Loại giày"
+            v-model="productBySlug.type"
+          ></v-text-field>
+        </div>
+      </div>
+
+      <!-- DONG SO 2 -->
+      <div class="form-rows ">
+        <!-- COT SO 1 -->
+        <div class="form-col-row-222">
+          <v-textarea
+            class="pt-4"
+            label="Mô tả"
+            v-model="productBySlug.description"
+          ></v-textarea>
+        </div>
+
+        <!-- COT SO 2 -->
+        <div class="form-col-row-222">
+          <v-text-field
+            label="Màu sắc"
+            v-model="productBySlug.color"
+          ></v-text-field>
+
+          <v-text-field
+            label="Kích thước giày"
+            v-model="productBySlug.size"
+          ></v-text-field>
+        </div>
+
+        <!-- COT SO 3 -->
+        <div class="form-col-row-222">
+          <div>
+            <v-btn depressed color="primary">
+              Primary
+            </v-btn>
+          </div>
+          <div>
+            <v-btn depressed color="primary">
+              Primary
+            </v-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- table -->
+    <v-simple-table fixed-header height="80vh">
       <template v-slot:default>
         <thead>
           <tr>
             <th class="">
-              Name
+              STT
             </th>
             <th class="">
-              Calories
+              ID Sản phẩm
+            </th>
+            <th class="">
+              Tên sản phẩm
+            </th>
+            <th class="">
+              Giá gốc
+            </th>
+            <th class="">
+              Giá bán
+            </th>
+            <th class="">
+              Loại
+            </th>
+            <th class="">
+              Chức năng
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
+          <tr
+            v-for="(item, index) in products"
+            :key="item.id"
+            @dblclick="getProductDataBySlug(item)"
+          >
+            <td>{{ index + 1 }}</td>
+            <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+            <td>
+              {{
+                item.originPrice
+                  ? item.originPrice.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })
+                  : 0
+              }}
+            </td>
+            <td>
+              {{
+                item.salePrice.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })
+              }}
+            </td>
+            <td>{{ item.type }}</td>
+            <td>
+              <v-btn small color="cyan" @click="getProductDataBySlug(item)">
+                <v-icon dark>
+                  mdi-pencil
+                </v-icon>
+              </v-btn>
+
+              <v-btn
+                class="ml-2 color-minus"
+                small
+                color="cyan"
+                @click="openDeleteProduct(item)"
+              >
+                <v-icon dark>
+                  mdi-minus
+                </v-icon>
+              </v-btn>
+            </td>
           </tr>
         </tbody>
       </template>
@@ -24,99 +222,121 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
-    desserts: [
-      {
-        name: "Frozen Yogurt",
-        calories: 159,
-      },
-      {
-        name: "Ice cream sandwich",
-        calories: 237,
-      },
-      {
-        name: "Eclair",
-        calories: 262,
-      },
-      {
-        name: "Cupcake",
-        calories: 305,
-      },
-      {
-        name: "Gingerbread",
-        calories: 356,
-      },
-      {
-        name: "Jelly bean",
-        calories: 375,
-      },
-      {
-        name: "Lollipop",
-        calories: 392,
-      },
-      {
-        name: "Honeycomb",
-        calories: 408,
-      },
-      {
-        name: "Donut",
-        calories: 452,
-      },
-      {
-        name: "KitKat",
-        calories: 518,
-      },
-      {
-        name: "Jelly bean",
-        calories: 375,
-      },
-      {
-        name: "Lollipop",
-        calories: 392,
-      },
-      {
-        name: "Honeycomb",
-        calories: 408,
-      },
-      {
-        name: "Donut",
-        calories: 452,
-      },
-      {
-        name: "KitKat",
-        calories: 518,
-      },
-      {
-        name: "Jelly bean",
-        calories: 375,
-      },
-      {
-        name: "Lollipop",
-        calories: 392,
-      },
-      {
-        name: "Honeycomb",
-        calories: 408,
-      },
-      {
-        name: "Donut",
-        calories: 452,
-      },
-      {
-        name: "KitKat",
-        calories: 518,
-      },
-    ],
+    products: [],
+    dialog: false,
+    productDelete: {},
+    productBySlug: {
+      avatar: "/Images/AD03SP04_1.png",
+      avatarr: "/Images/AD03SP04_2.png",
+      categoryID: "D03",
+      color: "Trắng/ Cam",
+      createdAt: null,
+      description:
+        "Bỏ lại công việc phía sau. Tìm kiếm sự tập trung trên sân với đôi giày golf adidas này. Đế ngoài gắn đinh tạo cảm giác sát đất cho tư thế vững chãi để bạn tự tin vung gậy và ghi điểm vào mọi lỗ golf. Thân giày không bám ẩm giữ cho đôi chân khô ráo trên nền cỏ đẫm nước và thời tiết ẩm ướt.",
+      id: "D03SP04",
+      material: "Da tổng hợp vi sợi",
+      name: "GIÀY TRAXION LITE",
+      originPrice: 2600000,
+      quantity: 50,
+      rate: 4,
+      salePrice: 2395000,
+      size: "29/30/31/32/33",
+      slug: "giay-traxion-lite",
+      type: "CHẠY",
+      updatedAt: null,
+    },
+    originPrice: 0,
+    salePrice: 0,
   }),
+
+  methods: {
+    async getProductData() {
+      try {
+        const response = await axios.get("https://localhost:44380/product/all");
+        this.products = response.data;
+        console.log(this.products);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    openDeleteProduct(item) {
+      this.dialog = true;
+      this.productDelete = item;
+    },
+
+    async getProductDataBySlug(item) {
+      try {
+        const response = await axios.get(
+          `https://localhost:44380/product/${item.slug}`
+        );
+        this.productBySlug = response.data;
+
+        this.originPrice = this.productBySlug.originPrice.toLocaleString(
+          "vi-VN",
+          {
+            style: "currency",
+            currency: "VND",
+          }
+        );
+
+        this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        });
+
+        console.log(this.productBySlug);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+
+  created() {
+    this.getProductData();
+
+    this.originPrice = this.productBySlug.originPrice.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+
+    this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    });
+  },
 };
 </script>
 
 <style>
+.v-text-field {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+table tr {
+  cursor: pointer;
+}
+
+.none-vapp,
+.v-application--wrap {
+  min-height: 0px !important;
+}
+
+.color-minus {
+  background-color: #ec006c !important;
+}
+
+.theme--light.v-btn.v-btn--has-bg {
+  background-color: var(--btn-default);
+}
+
 .container-products-admin {
-  margin: 12px;
+  margin: 10px;
   height: 80%;
-  overflow: scroll;
 }
 .theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
   color: var(--text-dark);
@@ -132,5 +352,49 @@ export default {
   font-size: 0.875rem;
   height: 48px;
   line-height: 48px;
+}
+
+/* form chi tiet */
+.form-chitiet {
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.form-rows {
+  display: flex;
+  width: 100%;
+}
+
+.form-col-row-1 {
+  width: 30%;
+  padding: 0px 4px;
+}
+
+.form-col-row-1:nth-of-type(2) {
+  width: 10%;
+}
+
+.form-col-row-1 > img {
+  width: 95%;
+  padding-bottom: 20px;
+  border-radius: 50%;
+}
+
+.form-col-row-222:nth-of-type(1) {
+  width: 60%;
+  padding: 0px 4px;
+}
+.form-col-row-222:nth-of-type(2) {
+  width: 30%;
+  padding: 0px 12px;
+}
+.form-col-row-222:nth-of-type(3) {
+  width: 10%;
+  margin: 0px auto;
+}
+
+.form-col-row-222:nth-of-type(3) > div {
+  margin: 10px 0px;
 }
 </style>

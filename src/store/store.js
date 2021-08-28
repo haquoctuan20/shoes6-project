@@ -9,9 +9,14 @@ export const store = new Vuex.Store({
   state: {
     layoutAdmin: false,
     /** Danh sach nguoi dung */
-    users: [],
+    users: [{ email: "a", password: "a", role: "ADMIN" }],
     /** user dang dang nhap */
     userLogin: JSON.parse(localStorage.getItem("userLogin")) || {},
+
+    snackBars: {
+      text: "",
+      status: false,
+    },
 
     // Tuan anh
     listProducts: [
@@ -59,24 +64,17 @@ export const store = new Vuex.Store({
     users: (state) => state.users,
     /**getter userlogin */
     userLogin: (state) => state.userLogin,
+
+    /** Danh sach san pham trong gio hang */
+    listProducts: (state) => state.listProducts,
+
+    snackBars: (state) => state.snackBars,
   },
 
   mutations: {
-    /**
-     * tắt mở header, navbar, footer khi ở trang quản trị admin
-     * @param {*} state
-     */
-    openLayoutAdmin(state) {
-      state.layoutAdmin = true;
-    },
-    closeLayoutAdmin(state) {
-      state.layoutAdmin = false;
-    },
-
     /** Luu danh sach user vao store */
     saveUsers(state, users) {
       state.users = users;
-      state.users.push({ email: "a", password: "a" });
       console.log(state.users);
     },
 
@@ -86,18 +84,30 @@ export const store = new Vuex.Store({
       console.log(userLogin);
       localStorage.setItem("userLogin", JSON.stringify(userLogin));
     },
+
+    /** Dang xuat */
+    logoutUser(state) {
+      state.userLogin = {};
+      localStorage.removeItem("userLogin");
+    },
+
+    /** get snackbars */
+    getSnackBars(state, text) {
+      console.log(text);
+
+      state.snackBars.text = text;
+      state.snackBars.status = true;
+    },
+
+    closeSnackBars(state) {
+      state.snackBars = {
+        text: "",
+        status: false,
+      };
+    },
   },
 
   actions: {
-    openLayoutAdmin: ({ commit }) => {
-      console.log("Vào admin");
-      commit("openLayoutAdmin");
-    },
-
-    closeLayoutAdmin: ({ commit }) => {
-      commit("closeLayoutAdmin");
-    },
-
     /**
      * Lay danh sach users tu database
      * commit saveUsers
@@ -115,6 +125,18 @@ export const store = new Vuex.Store({
 
     saveUserLogin({ commit }, userLogin) {
       commit("saveUserLogin", userLogin);
+    },
+
+    logoutUser({ commit }) {
+      commit("logoutUser");
+    },
+
+    getSnackBars({ commit }, text) {
+      commit("getSnackBars", text);
+    },
+
+    closeSnackBars({ commit }) {
+      commit("closeSnackBars");
     },
   },
 });

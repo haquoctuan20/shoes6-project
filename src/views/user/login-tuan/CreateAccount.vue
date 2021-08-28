@@ -13,7 +13,9 @@
 
     <div class="container-btn-create">
       <div>
-        <button class="btn btn-create-account">Tạo tài khoản</button>
+        <button class="btn-create-acc btn-create-account">
+          Tạo tài khoản
+        </button>
       </div>
 
       <div>
@@ -32,6 +34,20 @@ export default {};
 </script>
 
 <style>
+.btn-create-acc {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-create-acc {
+  padding: 14px 40px;
+  background-color: var(--btn-default);
+}
+.btn-create-acc:hover {
+  background-color: var(--btn-hover);
+  transition: var(--tran03);
+}
+
 .create-title {
   font-size: 36px;
   letter-spacing: 1px;

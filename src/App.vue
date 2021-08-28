@@ -28,6 +28,8 @@
         </transition>
       </div>
     </div>
+
+    <SnackBars />
   </div>
 </template>
 
@@ -35,13 +37,14 @@
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
 import Navbar from "@/components/Navbar.vue";
+import SnackBars from "@/components/SnackBars.vue";
 // admin
 
 import Sidebar from "@/components/admin/Sidebar.vue";
 import HeaderAdmin from "@/components/admin/HeaderAdmin.vue";
 
 export default {
-  components: { Footer, Header, Navbar, Sidebar, HeaderAdmin },
+  components: { Footer, Header, Navbar, Sidebar, HeaderAdmin, SnackBars },
   name: "App",
 
   data: () => ({}),
@@ -85,14 +88,13 @@ export default {
   --tran06: ease-in-out 0.6s;
 }
 
-a {
-  color: var(--text-dark) !important;
-}
-
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif !important;
   font-size: 14px;
   color: var(--text-dark);
+}
+a {
+  color: var(--text-dark) !important;
 }
 
 .wrapper {
@@ -132,5 +134,27 @@ body {
   100% {
     transform: translateY(30px);
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--btn-default);
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--btn-hover);
 }
 </style>

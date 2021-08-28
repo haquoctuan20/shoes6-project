@@ -23,7 +23,7 @@
 
     <div class="container-btn-login">
       <div>
-        <button class="btn btn-login-account" @click="openAfterLogin">
+        <button class="btn-shopnow btn-login-account" @click="openAfterLogin">
           Đăng nhập
         </button>
       </div>
@@ -76,7 +76,12 @@ export default {
     userLoging: {},
   }),
   methods: {
-    ...mapActions(["getUsers", "closeLayoutAdmin", "saveUserLogin"]),
+    ...mapActions([
+      "getUsers",
+      "closeLayoutAdmin",
+      "saveUserLogin",
+      "getSnackBars",
+    ]),
 
     openAfterLogin() {
       if (this.email.trim() === "" || this.password.trim() === "") {
@@ -90,6 +95,7 @@ export default {
         console.log(this.userLoging);
         if (this.userLoging.length > 0) {
           this.saveUserLogin(this.userLoging[0]);
+          this.getSnackBars(`Xin chào ${this.userLoging[0].email}`);
           this.$router.push("/admin");
         } else {
           alert("Đăng nhập không thành công!");

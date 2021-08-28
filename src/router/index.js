@@ -10,12 +10,20 @@ const routes = [
     path: "/",
     name: "Home",
     component: () => import("@/views/user/home-tuan/Home.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
   {
     // danh sách sản phẩm
     path: "/list-product",
     name: "ListProduct",
     component: () => import("@/views/user/list-product-chien/ListProduct.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
   {
     // chi tiết sản phẩm theo id
@@ -23,18 +31,30 @@ const routes = [
     name: "DetailProduct",
     component: () =>
       import("@/views/user/detail-product-chien/DetailProduct.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
   {
     // giỏ hàng
     path: "/cart-detail",
     name: "CartDetail",
     component: () => import("@/views/user/cart-detail-tanh/DetailCart.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
   {
     // thanh toán
     path: "/checkout",
     name: "Checkout",
     component: () => import("@/views/user/checkout-tanh/Checkout.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
 
   // ============== ADMIN =================
@@ -48,6 +68,7 @@ const routes = [
     beforeEnter: (to, from, next) => {
       console.log(store.getters.userLogin.role);
       if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
         next();
       } else next("/");
     },
@@ -58,6 +79,13 @@ const routes = [
     name: "Categories",
 
     component: () => import("@/views/admin/Categories.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly san pham
@@ -65,6 +93,13 @@ const routes = [
     name: "Products",
 
     component: () => import("@/views/admin/Products.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly don hang
@@ -72,6 +107,13 @@ const routes = [
     name: "Orders",
 
     component: () => import("@/views/admin/Orders.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly khach hang
@@ -79,6 +121,13 @@ const routes = [
     name: "Customers",
 
     component: () => import("@/views/admin/Customers.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly don hang hoan tra
@@ -86,6 +135,13 @@ const routes = [
     name: "OrderRefund",
 
     component: () => import("@/views/admin/OrderRefund.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly danh sach kho hang
@@ -93,6 +149,13 @@ const routes = [
     name: "Stores",
 
     component: () => import("@/views/admin/Stores.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
   {
     // Quan ly bao cao hang thang
@@ -100,6 +163,13 @@ const routes = [
     name: "Report",
 
     component: () => import("@/views/admin/Report.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log(store.getters.userLogin.role);
+      if (store.getters.userLogin.role === "ADMIN") {
+        store.state.layoutAdmin = true;
+        next();
+      } else next("/");
+    },
   },
 
   // =========== LOGIN ================
@@ -110,6 +180,10 @@ const routes = [
     name: "Login",
 
     component: () => import("@/views/user/login-tuan/Login.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
 
   {
@@ -118,6 +192,10 @@ const routes = [
     name: "CreateAccount",
 
     component: () => import("@/views/user/login-tuan/CreateAccount.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
 
   {
@@ -126,6 +204,10 @@ const routes = [
     name: "ResetPassword",
 
     component: () => import("@/views/user/login-tuan/ResetPassword.vue"),
+    beforeEnter: (to, from, next) => {
+      store.state.layoutAdmin = false;
+      next();
+    },
   },
 ];
 

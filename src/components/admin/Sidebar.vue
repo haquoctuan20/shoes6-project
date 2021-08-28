@@ -1,5 +1,6 @@
 <template>
   <div class="slidebar">
+    <!--  -->
     <router-link to="/">
       <div class="sidebar__image">
         <img src="@/assets/img/logo.png" alt="shoes6" />
