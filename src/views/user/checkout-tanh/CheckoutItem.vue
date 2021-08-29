@@ -1,5 +1,5 @@
 <template>
-  <li class="product">
+  <li class="product-checkout">
     <div class="image">
       <img
         :src="require('../../../assets/img/'.concat(image))"
@@ -34,18 +34,18 @@ export default {
 </script>
 
 <style scoped>
-.product {
+.product-checkout {
   background-color: #fafafa;
   padding: 0px;
   margin: 0px;
   list-style: none;
   padding-top: 16px;
 }
-.product .image {
+.product-checkout .image {
   position: relative;
   display: flex;
 }
-.product .image .quantity {
+.product-checkout .image .quantity {
   width: 21px;
   height: 21px;
   border: 1px solid #ccc;
@@ -57,7 +57,7 @@ export default {
   top: -12px;
   left: 54px;
 }
-.product .image .product-info {
+.product-checkout .image .product-info {
   margin-left: 20px;
 }
 .product-info .title {

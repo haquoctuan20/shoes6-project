@@ -9,7 +9,14 @@
       >
     </div>
     <div class="home-header__right">
-      <span class="home-header__title">Địa chỉ cửa hàng</span>
+      <a
+        class="home-header__title"
+        href="https://github.com/haquoctuan20/shoes6-project"
+        target="_blank"
+      >
+        <i class="fab fa-github"></i>
+        Địa chỉ cửa hàng(Github)
+      </a>
     </div>
   </header>
 </template>

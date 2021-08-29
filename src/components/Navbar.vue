@@ -131,7 +131,12 @@ export default {
     ...mapGetters(["userLogin", "listProducts"]),
   },
   data: () => ({
-    listCollection: ["Thể thao", "Leo núi", "Boots", "Oxford"],
+    listCollection: [
+      "GIÀY BÓNG ĐÁ",
+      "GIÀY CHẠY BỘ",
+      "GIÀY  THỜI TRANG",
+      "DÉP THỜI TRANG",
+    ],
     dialog: false,
   }),
   methods: {
@@ -192,13 +197,13 @@ a {
 .nav-menu-item {
   cursor: pointer;
   display: inline-block;
-  padding: 0px 16px;
+  padding: 0px 10px;
+  transition: var(--tran03);
 }
 .nav-menu-item:hover {
-  font-size: 15px;
+  font-weight: 500;
   transform: translate(0, -3px);
   color: var(--text-hover);
-  transition: var(--tran03);
 }
 
 .home-nav__option {
@@ -238,7 +243,7 @@ a {
   display: none;
   position: absolute;
   top: 20px;
-  right: -30px;
+  right: 0px;
   width: 180px;
   background-color: #fff;
 }
@@ -255,7 +260,7 @@ a {
   content: "";
   position: absolute;
   top: -17%;
-  left: 133px;
+  left: 164px;
   margin-left: 0px;
   border-width: 7px;
   border-style: solid;

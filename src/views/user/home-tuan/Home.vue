@@ -11,6 +11,16 @@
             :key="img.id"
             :src="img.url"
           >
+            <div
+              class="parallax-title parallax-title-carousel"
+              @click="openListProduct"
+            >
+              <p>KHUYỄN MÃI MÙA HÈ NÀY</p>
+              <p>
+                GIẢM NGAY <span>50%</span> <br />CHO
+                <span>LẦN MUA ĐẦU TIÊN</span>
+              </p>
+            </div>
           </v-carousel-item>
         </v-carousel>
       </v-app>
@@ -256,6 +266,28 @@ export default {
 .parallax-title span {
   color: #f01133;
 }
+
+.parallax-title-carousel {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: var(--tran03);
+  color: var(--text-light);
+  text-shadow: 2px 2px 10px var(--text-dark);
+  animation: fadeTopDown 2000ms ease forwards;
+}
+
+@keyframes fadeTopDown {
+  0% {
+    transform: translateY(0px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(120px);
+  }
+}
+
 /* css button */
 
 .btn-shopnow {

@@ -32,24 +32,19 @@
         <span class="description">{{ product.description }}</span>
         <div class="price title">
           <p>GIÁ NIÊM YẾT:</p>
-          <p>
-            {{ product.originPrice }}
-          </p>
+          <p>${{ product.originPrice }}</p>
         </div>
         <div class="priceSale title material">
           <p>GIÁ BÁN:</p>
-          <p>
-            {{
-              product.salePrice.toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })
-            }}
-          </p>
+          <p>${{ product.salePrice }}</p>
         </div>
         <div class="material title">
-          <p>MATERIAL:</p>
+          <p>CHẤT LIỆU:</p>
           <p>{{ product.material }}</p>
+        </div>
+        <div class="material title">
+          <p>MÀU SẮC:</p>
+          <div class="color" :class="this.dataColor"></div>
         </div>
         <div class="material title">
           <p>SỐ LƯỢNG CÒN:</p>
@@ -65,14 +60,7 @@
         </div>
         <div class="material title">
           <p>TỔNG TIỀN:</p>
-          <p>
-            {{
-              (product.salePrice * count).toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })
-            }}
-          </p>
+          <p>{{ product.salePrice * count }}</p>
         </div>
         <div class="acction">
           <div class="addToCart">
@@ -176,6 +164,8 @@ export default {
     product: {},
     count: 1,
     productRelated: {},
+    dataColor: "",
+    classColor: "",
   }),
 
   methods: {
@@ -198,11 +188,12 @@ export default {
         "https://localhost:44380/product/" + this.slug
       );
       this.product = response.data;
+      console.log(this.dataColor);
       const relateds = await axios.get("https://localhost:44380/product/all");
       this.productRelated = relateds.data.filter(
-        (o) => o.type == this.product.type
+        (o, i) => o.type === this.product.type && i % 2 === 0
       );
-      console.log(this.product);
+      this.dataColor = this.product.color;
       console.log(this.productRelated);
     },
 
@@ -216,14 +207,15 @@ export default {
   created() {
     this.getSlug();
     this.getData();
-    console.log(this.product);
+    // this.selectColor();
+    // console.log(this.classColor)
   },
 };
 </script>
 
 <style>
 .list-product {
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .title-page {
@@ -259,7 +251,7 @@ export default {
 }
 .image-product {
   width: 45%;
-  height: 100vh;
+  /* height: 100vh; */
   margin-right: 70px;
 }
 
@@ -300,6 +292,29 @@ export default {
 
 .material {
   margin-top: 20px;
+}
+
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: 1px solid #bbbbbb;
+}
+
+.Đỏ {
+  background-color: red;
+}
+
+.Đen {
+  background-color: black;
+}
+
+.Trắng {
+  background-color: white;
+}
+
+.Bạc {
+  background-color: silver;
 }
 
 .material > p {
@@ -344,7 +359,6 @@ export default {
   color: white;
   margin: 5px;
   font-size: 16px;
-  /* padding: 15px 20px; */
   height: 50px;
   cursor: pointer;
   display: flex;

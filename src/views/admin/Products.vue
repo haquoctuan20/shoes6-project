@@ -27,7 +27,7 @@
     </div>
 
     <!-- button thêm mới -->
-    <v-btn class="mb-2" depressed color="primary">
+    <v-btn class="mb-2" depressed color="primary" @click="openAddEdit()">
       Thêm mới
     </v-btn>
 
@@ -36,16 +36,34 @@
       <!-- DONG SO 1 -->
       <div class="form-rows">
         <!-- avatar -->
-        <div class="form-col-row-1">
+        <div class="form-col-row-1" v-if="productBySlug.avatar !== ''">
           <img :src="require('@/assets'.concat(productBySlug.avatar))" alt="" />
         </div>
 
-        <div class="form-col-row-1">
+        <div class="form-col-row-1" v-if="productBySlug.avatar === ''">
+          <v-file-input
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Chọn ảnh sản phẩm"
+            prepend-icon="mdi-camera"
+            label="Ảnh sản phẩm 1"
+          ></v-file-input>
+
+          <v-file-input
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Chọn ảnh sản phẩm"
+            prepend-icon="mdi-camera"
+            label="Ảnh sản phẩm 2"
+          ></v-file-input>
+        </div>
+
+        <div class="form-col-row-1" v-if="productBySlug.avatar !== ''">
           <img
             :src="require('@/assets'.concat(productBySlug.avatarr))"
             alt=""
           />
         </div>
+
+        <div class="form-col-row-1" v-if="productBySlug.avatar === ''"></div>
 
         <!-- COT SO 2 -->
         <div class="form-col-row-1">
@@ -127,19 +145,19 @@
 
         <!-- COT SO 3 -->
         <div class="form-col-row-222">
-          <div>
-            <v-btn depressed color="primary">
-              Primary
-            </v-btn>
-          </div>
-          <div>
-            <v-btn depressed color="primary">
-              Primary
-            </v-btn>
-          </div>
+          <button class="btn-admin" @click="cancelAddEdit()">
+            Đồng ý
+          </button>
+          <button class="btn-admin btn-admin-cancel " @click="cancelAddEdit()">
+            Hủy
+          </button>
+          <button class="btn-admin btn-admin-cancel " @click="openTable()">
+            Danh sách sản phẩm
+          </button>
         </div>
       </div>
     </div>
+
     <!-- table -->
     <v-simple-table fixed-header height="80vh">
       <template v-slot:default>
@@ -229,26 +247,7 @@ export default {
     products: [],
     dialog: false,
     productDelete: {},
-    productBySlug: {
-      avatar: "/Images/AD03SP04_1.png",
-      avatarr: "/Images/AD03SP04_2.png",
-      categoryID: "D03",
-      color: "Trắng/ Cam",
-      createdAt: null,
-      description:
-        "Bỏ lại công việc phía sau. Tìm kiếm sự tập trung trên sân với đôi giày golf adidas này. Đế ngoài gắn đinh tạo cảm giác sát đất cho tư thế vững chãi để bạn tự tin vung gậy và ghi điểm vào mọi lỗ golf. Thân giày không bám ẩm giữ cho đôi chân khô ráo trên nền cỏ đẫm nước và thời tiết ẩm ướt.",
-      id: "D03SP04",
-      material: "Da tổng hợp vi sợi",
-      name: "GIÀY TRAXION LITE",
-      originPrice: 2600000,
-      quantity: 50,
-      rate: 4,
-      salePrice: 2395000,
-      size: "29/30/31/32/33",
-      slug: "giay-traxion-lite",
-      type: "CHẠY",
-      updatedAt: null,
-    },
+    productBySlug: {},
     originPrice: 0,
     salePrice: 0,
   }),
@@ -276,13 +275,15 @@ export default {
         );
         this.productBySlug = response.data;
 
-        this.originPrice = this.productBySlug.originPrice.toLocaleString(
-          "vi-VN",
-          {
-            style: "currency",
-            currency: "VND",
-          }
-        );
+        if (this.productBySlug.originPrice) {
+          this.originPrice = this.productBySlug.originPrice.toLocaleString(
+            "vi-VN",
+            {
+              style: "currency",
+              currency: "VND",
+            }
+          );
+        }
 
         this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
           style: "currency",
@@ -290,24 +291,49 @@ export default {
         });
 
         console.log(this.productBySlug);
+
+        window.scrollTo(0, 0);
       } catch (error) {
         console.error(error);
       }
+    },
+
+    cancelAddEdit() {
+      this.productBySlug = {};
+    },
+
+    openAddEdit() {
+      this.productBySlug = {
+        avatar: "",
+        avatarr: "",
+        categoryID: "",
+        color: "",
+        createdAt: null,
+        description: "",
+        id: "",
+        material: "",
+        name: "",
+        originPrice: 0,
+        quantity: 0,
+        rate: 0,
+        salePrice: 0,
+        size: "",
+        slug: "",
+        type: "",
+        updatedAt: null,
+      };
+
+      this.originPrice = 0;
+      this.salePrice = 0;
+    },
+
+    openTable() {
+      window.scrollTo(0, 600);
     },
   },
 
   created() {
     this.getProductData();
-
-    this.originPrice = this.productBySlug.originPrice.toLocaleString("vi-VN", {
-      style: "currency",
-      currency: "VND",
-    });
-
-    this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
-      style: "currency",
-      currency: "VND",
-    });
   },
 };
 </script>
@@ -396,5 +422,28 @@ table tr {
 
 .form-col-row-222:nth-of-type(3) > div {
   margin: 10px 0px;
+}
+
+.btn-admin {
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: 500;
+  color: var(--text-light);
+  background-color: var(--btn-default);
+}
+
+.btn-admin-cancel {
+  margin-top: 10px;
+  background-color: #ec006c;
+}
+
+.btn-admin:hover {
+  background-color: var(--btn-hover);
+  transition: var(--tran03);
+}
+
+.btn-admin-cancel:hover {
+  background-color: #c40058;
 }
 </style>

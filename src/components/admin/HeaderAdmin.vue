@@ -1,5 +1,13 @@
 <template>
   <div class="header-admin">
+    <!-- left -->
+    <div class="header-left">
+      <router-link tag="h2" to="/">
+        <i class="fas fa-arrow-circle-left"></i>
+        Trang chủ
+      </router-link>
+    </div>
+
     <div>
       <v-app class="none-vapp">
         <v-dialog v-model="dialog" persistent max-width="400">
@@ -20,14 +28,6 @@
           </v-card>
         </v-dialog>
       </v-app>
-    </div>
-
-    <!-- left -->
-    <div class="header-left">
-      <router-link tag="h2" to="/">
-        <i class="fas fa-arrow-circle-left"></i>
-        Trang chủ
-      </router-link>
     </div>
 
     <!-- center -->

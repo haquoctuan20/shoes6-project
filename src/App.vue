@@ -95,6 +95,7 @@ body {
 }
 a {
   color: var(--text-dark) !important;
+  text-decoration: none !important;
 }
 
 .wrapper {
