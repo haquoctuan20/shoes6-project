@@ -7,6 +7,7 @@
           ref="email"
           label="Email"
           placeholder="...@gmail.com"
+          :rules="[rules.required, rules.email]"
           v-model="email"
         ></v-text-field>
         <v-text-field
@@ -23,7 +24,7 @@
 
     <div class="container-btn-login">
       <div>
-        <button class="btn-shopnow btn-login-account" @click="openAfterLogin">
+        <button class="btn-login btn-login-account" @click="openAfterLogin">
           Đăng nhập
         </button>
       </div>
@@ -67,8 +68,12 @@ export default {
   data: () => ({
     show1: false,
     rules: {
-      required: (value) => !!value || "Required.",
+      required: (value) => !!value || "Yêu cầu nhập.",
       min: (v) => v.length >= 8 || "Ít nhất 8 ký tự",
+      email: (value) => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "Mail không hợp lệ.";
+      },
     },
 
     email: "",
@@ -105,7 +110,6 @@ export default {
   },
 
   created() {
-    // this.$store.dispatch("getUsers");
     this.getUsers();
   },
 
@@ -117,6 +121,20 @@ export default {
 </script>
 
 <style>
+.btn-login {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.btn-login {
+  padding: 14px 40px;
+  background-color: var(--btn-default);
+}
+.btn-login:hover {
+  background-color: var(--btn-hover);
+  transition: var(--tran03);
+}
+
 .login-title {
   font-size: 36px;
   letter-spacing: 1px;
