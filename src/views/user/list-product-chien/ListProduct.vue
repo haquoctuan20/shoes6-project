@@ -3,12 +3,13 @@
        Created by: TDCHIEN on 1/8/2021
    -->
   <div class="list-product">
+
     <!-- Header list product -->
     <div class="title-page">
       <div class="name-page">
-        <p>PRODUCTS</p>
-        <span>Home</span><span> / products</span>
-      </div>
+        <p>SẢN PHẨM</p>
+        <span>Trang chủ</span><span>  / sản phẩm</span>
+      </div>  
     </div>
 
     <!-- Nội dung chính  -->
@@ -17,83 +18,64 @@
       <div class="option">
         <!-- Catagory -->
         <div class="category title-option">
-          <p>Category</p>
+          <p>Thể loại</p>
           <ul>
-            <li>Home</li>
-            <li>
-              Collection
-              <span class="toggle-category" @click="hidden_collection">+</span>
+            <li>Trang chủ</li>
+            <li>Sưu tập <span class="toggle-category" @click="hidden_collection">+</span>
               <transition name="fade">
                 <ul v-if="hiddenCollection">
-                  <li>Mid Waterproof</li>
-                  <li>Brogue shoe</li>
-                  <li>Firecamp</li>
-                  <li>Forclaz</li>
-                </ul>
-              </transition>
+                  <li>Chống nước</li>
+                  <li>Giày Brogue</li>
+                  <li>Giày da</li>
+                  <li>Ủng</li>
+                </ul> 
+              </transition> 
             </li>
-            <li>
-              Shoes <span class="toggle-category" @click="hidden_shoes">+</span>
+            <li>Giày <span class="toggle-category" @click="hidden_shoes">+</span>
               <transition name="fade">
-                <ul v-if="hiddenShoes">
-                  <li>Court shoe</li>
-                  <li>Diabetic shoe</li>
-                  <li>Elevator shoes</li>
-                  <li>Blucher shoe</li>
-                </ul>
-              </transition>
+                  <ul v-if="hiddenShoes">
+                    <li>Giày công sở</li>
+                    <li>Giày sinh viên</li>
+                    <li>Giày thanh niên</li>
+                  </ul> 
+                </transition> 
             </li>
-            <li>
-              Boots <span class="toggle-category" @click="hidden_boots">+</span>
+            <li>Ủng <span class="toggle-category" @click="hidden_boots">+</span>
               <transition name="fade">
-                <ul v-if="hiddenBoots">
-                  <li>Thigh-hight</li>
-                  <li>Chap boots</li>
-                  <li>Rigger boots</li>
-                </ul>
-              </transition>
+                  <ul v-if="hiddenBoots">
+                    <li>Ủng dài</li>
+                    <li>Ủng ngắn</li>
+                    <li>Ủng Rigger</li>
+                  </ul> 
+                </transition> 
             </li>
-            <li>
-              Climbing
-              <span class="toggle-category" @click="hidden_climbing">+</span>
+            <li>Giày leo núi <span class="toggle-category" @click="hidden_climbing">+</span>
               <transition name="fade">
-                <ul v-if="hiddenClimbing">
-                  <li>Thigh-hight</li>
-                  <li>Chap boots</li>
-                  <li>Rigger boots</li>
-                </ul>
-              </transition>
+                  <ul v-if="hiddenClimbing">
+                    <li>Giày cao cổ</li>
+                    <li>Giày ma sát tốt</li>
+                    <li>Giày cổ ngắn</li>
+                  </ul> 
+                </transition> 
             </li>
-            <li>Pages</li>
+            <li>Trang</li>
           </ul>
         </div>
 
         <!-- Shop By Color -->
         <div class="byColor title-option">
-          <p>Shop By Color</p>
+          <p>Chọn theo màu sắc</p>
           <ul>
-            <li>
-              <div class="icon-color red" id="red"></div>
-              <span>Red</span>
-            </li>
-            <li>
-              <div class="icon-color black" id="black"></div>
-              <span>Black</span>
-            </li>
-            <li>
-              <div class="icon-color silver" id="silver"></div>
-              <span>Silver</span>
-            </li>
-            <li>
-              <div class="icon-color white" id="white"></div>
-              <span>White</span>
-            </li>
+            <li><div class="icon-color red" id="red"></div><span>Đỏ</span></li>
+            <li><div class="icon-color black" id="black"></div><span>Đen</span></li>
+            <li><div class="icon-color silver" id="silver"></div><span>Bạc</span></li>
+            <li><div class="icon-color white" id="white"></div><span>Trắng</span></li>
           </ul>
         </div>
 
         <!-- Shop By Size -->
         <div class="bySize title-option">
-          <p>Shop By Size</p>
+          <p>Chọn theo màu kích cỡ</p>
           <ul>
             <li>7</li>
             <li>7.5</li>
@@ -104,7 +86,7 @@
 
         <!-- Shop By Brand -->
         <div class="byBrand title-option">
-          <p>Shop By Brand</p>
+          <p>Chọn theo thương hiệu</p>
           <ul>
             <li>Havaianas</li>
             <li>Geox</li>
@@ -115,22 +97,22 @@
 
         <!-- Shop by Price -->
         <div class="byPrice title-option">
-          <p>Shop By Price</p>
+          <p>Chọn theo giá</p>
           <ul>
-            <li>$100 - $200</li>
-            <li>$200 - $300</li>
-            <li>$300 - $400</li>
-            <li>$400 - $500</li>
-            <li>$500 - $700</li>
-            <li>$700 - $1000</li>
+            <li>100.000 - 300.000</li>
+            <li>300.000 - 500.000</li>
+            <li>500.000 - 700.000</li>
+            <li>700.000 - 1.000.000</li>
+            <li>1.000.000 - 1.500.000</li>
+            <li>1.500.000 - 3.000.000</li>
           </ul>
         </div>
 
         <!-- Shop by Meterial -->
         <div class="byMaterial title-option">
-          <p>Shop By Material</p>
+          <p>Chọn theo chất liệu</p>
           <ul>
-            <li>Plastics</li>
+            <li>Chất dẻo</li>
           </ul>
         </div>
       </div>
@@ -141,92 +123,78 @@
         <div class="sort">
           <div class="positonSort">
             <div class="SelectSort">
-              <span>Sort by &nbsp; &nbsp; &nbsp; </span>
-              <div class="select" v-on:click="clickSelectSort">
-                {{ valueSelected }}
-              </div>
+            <span>Sắp xếp &nbsp; &nbsp; &nbsp; </span>
+            <div class="select" v-on:click="clickSelectSort">
+              {{ valueSelected }}
             </div>
-            <ul class="values" v-if="hiddenValuesSort" v-on:click="selectValue">
-              <li
-                v-for="itemSelect in valueSelect"
+          </div>
+          <ul class="values" v-if="hiddenValuesSort"
+              v-on:click="selectValue">
+            <li v-for="itemSelect in valueSelect"
                 :value="itemSelect.value"
                 :key="itemSelect.value"
-              >
-                {{ itemSelect.text }}
-              </li>
-            </ul>
+            >
+            {{itemSelect.text}}
+            </li>
+          </ul>
           </div>
         </div>
 
         <!-- Danh sách sản phẩm -->
         <div class="listProduct">
           <ul>
-            <li
-              class="product"
-              v-for="item in products"
-              :key="item.id"
-              @click="viewDetail(item)"
-            >
-              <div>
-                <!-- filter nền khi hover vào ảnh -->
-                <span id="filterProduct">
-                  <div id="view" class="actionProduct">
-                    <img src="../../../assets/img/icon/eye.png" alt="" />
-                  </div>
-                  <div id="link" class="actionProduct">
-                    <img src="../../../assets/img/icon/link.png" alt="" />
-                  </div>
-                  <div id="heart" class="actionProduct">
-                    <img src="../../../assets/img/icon/heart.png" alt="" />
-                  </div>
-                </span>
-                <!-- Hình ảnh chính và phụ -->
+              <li class="product"
+                  v-for="item in products"
+                  :key="item.id"
+                  @click="viewDetail(item)"
+              >
                 <div>
-                  <span id="positionImage">
-                    <img
-                      id="mainImage"
-                      :src="require('../../../assets'.concat(item.avatar))"
-                      alt=""
-                    />
-                    <img
-                      id="extraImage"
-                      :src="require('../../../assets'.concat(item.avatar))"
-                      alt=""
-                    />
+                  <!-- filter nền khi hover vào ảnh -->
+                  <span id="filterProduct">
+                    <div id="view" class="actionProduct">
+                      <img src="../../../assets/img/icon/eye.png" alt="">
+                    </div>
+                    <div id="link" class="actionProduct">
+                      <img src="../../../assets/img/icon/link.png" alt="">
+                    </div>
+                    <div id="heart" class="actionProduct">
+                      <img src="../../../assets/img/icon/heart.png" alt="">
+                    </div>
                   </span>
+                  <!-- Hình ảnh chính và phụ -->
+                  <div>
+                    <span id="positionImage">
+                      <img id="mainImage" :src="require('../../../assets'.concat(item.avatar))" alt="">
+                      <img id="extraImage" :src="require('../../../assets'.concat(item.avatar))" alt="">
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <!-- Detail sản phẩm -->
-              <div class="productDetail">
-                <p class="nameProduct">
-                  {{ item.name }}
-                </p>
-                <div>
-                  <div class="costProduct">
-                    <p>
-                      {{
-                        item.salePrice.toLocaleString("vi-VN", {
-                          style: "currency",
-                          currency: "VND",
-                        })
-                      }}
-                    </p>
-                    <!-- Sao đánh giá -->
-                    <div class="star">
-                      <div v-for="index in item.rate" :key="index">
-                        <img src="../../../assets/img/icon/star1.png" alt="" />
-                      </div>
-                      <div v-for="index in 5 - item.rate" :key="'A' + index">
-                        <img src="../../../assets/img/icon/star.png" alt="" />
-                      </div>
+                <!-- Detail sản phẩm -->
+                <div class="productDetail">
+                  <p class="nameProduct">
+                    {{item.name}}
+                  </p>
+                  <div>
+                    <div class="costProduct">
+                      <p>{{item.salePrice}}₫</p>
+                      <!-- Sao đánh giá -->
+                        <div class="star">
+                          <div v-for="index in item.rate"
+                            :key="index">
+                              <img src="../../../assets/img/icon/star1.png" alt="">
+                          </div>
+                          <div v-for="index in 5 - item.rate"
+                            :key="'A'+index">
+                              <img src="../../../assets/img/icon/star.png" alt="">
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                      <img src="../../../assets/img/icon/card.png" alt="">
                     </div>
                   </div>
-                  <div class="card">
-                    <img src="../../../assets/img/icon/card.png" alt="" />
-                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
           </ul>
         </div>
       </div>
@@ -239,47 +207,48 @@
 import * as axios from "axios";
 export default {
   created() {
-    this.getData();
+    this.getData()
   },
   methods: {
-    // Lấy giữu liệu từ API
-    async getData() {
-      const response = await axios.get("https://localhost:44380/product/all");
-      this.products = response.data;
-      console.log(response.data);
-    },
+
+  // Lấy giữu liệu từ API
+  async getData() {
+    const response = await axios.get("https://localhost:44380/product/all");  
+    this.products = response.data;
+    console.log(response.data)
+  },
 
     // Sự kiện ấn hiện option
     hidden_collection(e) {
       this.hiddenCollection = !this.hiddenCollection;
-      if (this.hiddenCollection) {
-        e.target.innerText = "-";
+      if(this.hiddenCollection) {
+        e.target.innerText = '-';
       } else {
-        e.target.innerText = "+";
+        e.target.innerText = '+';
       }
     },
     hidden_shoes(e) {
       this.hiddenShoes = !this.hiddenShoes;
-      if (this.hiddenShoes) {
-        e.target.innerText = "-";
+      if(this.hiddenShoes) {
+        e.target.innerText = '-';
       } else {
-        e.target.innerText = "+";
+        e.target.innerText = '+';
       }
     },
     hidden_boots(e) {
       this.hiddenBoots = !this.hiddenBoots;
-      if (this.hiddenBoots) {
-        e.target.innerText = "-";
+       if(this.hiddenBoots) {
+        e.target.innerText = '-';
       } else {
-        e.target.innerText = "+";
+        e.target.innerText = '+';
       }
     },
     hidden_climbing(e) {
       this.hiddenClimbing = !this.hiddenClimbing;
-      if (this.hiddenClimbing) {
-        e.target.innerText = "-";
+      if(this.hiddenClimbing) {
+        e.target.innerText = '-';
       } else {
-        e.target.innerText = "+";
+        e.target.innerText = '+';
       }
     },
 
@@ -289,41 +258,41 @@ export default {
     },
 
     // Sự liện chọn option sort
-    selectValue: function(e) {
+    selectValue : function(e) {
       this.valueSelected = e.target.innerText;
       this.hiddenValuesSort = !this.hiddenValuesSort;
       switch (this.valueSelected) {
         // sắp xếp theo giá tăng dần
-        case "Price, low to hight":
+        case 'Price, low to hight':
           this.products.sort((a, b) => a.salePrice - b.salePrice);
           break;
         // Sắp xếp theo giá giảm dần
-        case "Price, hight to low":
+        case 'Price, hight to low':
           this.products.sort((a, b) => b.salePrice - a.salePrice);
           break;
         // Sắp xếp tên sản phẩm theo A -> Z
-        case "A-Z":
-          this.products.sort(function(a, b) {
-            var typeA = a.name.toUpperCase();
-            var typeB = b.name.toUpperCase();
-            if (typeA > typeB) {
-              return 1;
-            } else if (typeA < typeB) {
-              return -1;
-            } else return 0;
-          });
+        case 'A-Z':
+          this.products.sort(function(a, b){
+              var typeA = a.name.toUpperCase();
+              var typeB = b.name.toUpperCase();
+              if (typeA > typeB) {
+                return 1;
+              } else if (typeA < typeB) {
+                return -1;
+              } else return 0;
+            });
           break;
         // Sắp xếp tên sản phẩm theo Z -> A
-        case "Z-A":
-          this.products.sort(function(a, b) {
-            var typeA = a.name.toUpperCase();
-            var typeB = b.name.toUpperCase();
-            if (typeA < typeB) {
-              return 1;
-            } else if (typeA > typeB) {
-              return -1;
-            } else return 0;
-          });
+        case 'Z-A':
+          this.products.sort(function(a, b){
+              var typeA = a.name.toUpperCase();
+              var typeB = b.name.toUpperCase();
+              if (typeA < typeB) {
+                return 1;
+              } else if (typeA > typeB) {
+                return -1;
+              } else return 0;
+            });
           break;
         default:
           break;
@@ -337,25 +306,25 @@ export default {
 
   data() {
     return {
-      hiddenCollection: false,
-      hiddenShoes: false,
-      hiddenBoots: false,
-      hiddenClimbing: false,
-      hiddenValuesSort: false,
-      valueSelect: [
-        { text: "Featured", value: "featured" },
-        { text: "Price, low to hight", value: "lowToHight" },
-        { text: "Price, hight to low", value: "hightToLow" },
-        { text: "A-Z", value: "A-Z" },
-        { text: "Z-A", value: "Z-A" },
-        { text: "Date, old to new", value: "oldToNew" },
-        { text: "Date, new to old", value: "newToOld" },
-        { text: "Best Selling", value: "bestSelling" },
+      hiddenCollection : false,
+      hiddenShoes : false,
+      hiddenBoots : false,
+      hiddenClimbing : false,
+      hiddenValuesSort : false,
+      valueSelect : [
+        {text: 'Tính năng', value: 'featured'},
+        {text: 'Giá từ thấp đến cao', value: 'lowToHight'},
+        {text: 'Giá từ cao xuống thấp', value: 'hightToLow'},
+        {text: 'A-Z', value: 'A-Z'},
+        {text: 'Z-A', value: 'Z-A'},
+        {text: 'Ngày thêm lâu nhất', value: 'oldToNew'},
+        {text: 'Ngày thêm mới nhất', value: 'newToOld'},
+        {text: 'Bán chạy', value: 'bestSelling'},
       ],
-      valueSelected: "Featured",
-      products: [],
+      valueSelected: 'Tính năng',
+      products : [],
       productSelected: [],
-    };
+    }
   },
 };
 </script>
@@ -391,7 +360,7 @@ export default {
   cursor: pointer;
   font-size: 14px;
 }
-.name-page > span:hover {
+.name-page > span:hover{
   color: #4da8da;
 }
 
@@ -434,6 +403,7 @@ export default {
 .title-option > ul > li > ul > li {
   padding-top: 20px;
 }
+
 
 /* Css Category */
 .category > ul > li {
@@ -489,7 +459,7 @@ export default {
 
 /* Css By Size */
 
-.bySize ul {
+.bySize ul{
   margin-top: 30px;
   display: flex;
 }
@@ -510,7 +480,7 @@ export default {
 }
 
 /* Css Price */
-.byPrice > ul > li {
+.byPrice > ul > li{
   list-style: square;
 }
 
@@ -526,7 +496,7 @@ export default {
   width: calc(100% - 318px);
 }
 
-.sort {
+.sort{
   position: relative;
   width: 100%;
   z-index: 6;
@@ -541,7 +511,7 @@ export default {
   display: flex;
 }
 
-.select {
+.select{
   width: 191px;
   height: 40px;
   cursor: pointer;
@@ -576,7 +546,7 @@ export default {
   cursor: pointer;
 }
 
-.listProduct {
+.listProduct{
   width: 100%;
   margin-top: 50px;
 }
@@ -594,7 +564,7 @@ export default {
   cursor: pointer;
 }
 
-.listProduct ul li:hover .nameProduct {
+.listProduct ul li:hover .nameProduct{
   color: darkorchid;
 }
 
@@ -607,7 +577,7 @@ export default {
   height: 210px;
 }
 
-#filterProduct {
+#filterProduct{
   width: 210px;
   height: 210px;
   position: absolute;
@@ -628,7 +598,7 @@ export default {
   text-align: center;
 }
 
-.actionProduct img {
+.actionProduct img{
   width: 25px !important;
 }
 
@@ -637,10 +607,10 @@ export default {
 }
 
 .listProduct ul li > div > div > span img {
-  width: 210px;
+   width: 210px;
 }
 
-.listProduct ul li div span {
+.listProduct ul li div span{
   display: flex;
   position: absolute;
   left: 0;
@@ -648,7 +618,7 @@ export default {
   transition: left 0.4s linear;
 }
 
-.listProduct ul li div:hover span {
+.listProduct ul li div:hover span{
   left: -210px;
   transition-duration: 0.4s;
 }
@@ -657,12 +627,12 @@ export default {
   left: 0;
 }
 
-.listProduct ul li > div:first-child:hover {
+.listProduct ul li > div:first-child:hover{
   border: 1px solid black;
   transition-duration: 0.5s;
 }
 
-.listProduct ul li div:hover #filterProduct {
+.listProduct ul li div:hover #filterProduct{
   left: 0px;
 }
 
@@ -711,4 +681,5 @@ export default {
 .star img {
   float: left;
 }
+
 </style>

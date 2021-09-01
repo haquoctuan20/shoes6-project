@@ -11,7 +11,7 @@ namespace WebAPI.Entities
         public string Phone { get; set; }
         public string Address { get; set; }
         public double TotalMoney { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public int UserID { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

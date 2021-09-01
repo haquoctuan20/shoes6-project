@@ -62,7 +62,7 @@
           to="/admin/customers"
           :class="{ tabActiveClass: tabActive === 'customers' }"
         >
-          <i class="fas fa-users"></i> Khách hàng
+          <i class="fas fa-users"></i> Người dùng
         </router-link>
       </div>
 

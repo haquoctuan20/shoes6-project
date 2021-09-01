@@ -28,6 +28,9 @@
 
     <!-- button thêm mới -->
     <v-btn class="mb-2" depressed color="primary" @click="openAddEdit()">
+      <v-icon dark>
+        mdi-plus
+      </v-icon>
       Thêm mới
     </v-btn>
 

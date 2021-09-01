@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KAVXJItKGVON88TJKF4cVo7SftQ7OYyyDe0sbZLFvFT/FnefIMM9OEhAEogeMj+iYpPn18JDWoar4VnheR6StQ==",
+  "dgSpecHash": "bi7StuRBDvnPUHsRwYuyNpe6q/JZVeyhPwRjgi8unZzAZpHnj2GRnJpjyqInu65n8TFA54T2CA/O0uUuU2AIWA==",
   "success": true,
-  "projectFilePath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\haquo\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\haquo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

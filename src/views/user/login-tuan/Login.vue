@@ -85,12 +85,12 @@ export default {
 
     openAfterLogin() {
       if (this.email.trim() === "" || this.password.trim() === "") {
-        alert("Nhập email, mật khẩu!");
+        this.getSnackBars("Nhập email, mật khẩu!");
         this.$refs.email.focus();
       } else {
         const users = this.$store.getters.users;
         this.userLoging = users.filter(
-          (u) => u.email === this.email && u.password === this.password
+          (u) => u.username === this.email && u.password === this.password
         );
         console.log(this.userLoging);
         if (this.userLoging.length > 0) {
@@ -98,7 +98,7 @@ export default {
           this.getSnackBars(`Xin chào ${this.userLoging[0].email}`);
           this.$router.push("/admin");
         } else {
-          alert("Đăng nhập không thành công!");
+          this.getSnackBars("Tài khoản hoặc mật khẩu không chính xác!");
         }
       }
     },

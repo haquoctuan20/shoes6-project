@@ -171,9 +171,11 @@ namespace WebAPI.Controllers
             // Khởi tạo DynamicParameters
             DynamicParameters dynamicParameters = new DynamicParameters();
             // Câu lệnh sql
-            string sqlCommand = $"DELETE FROM user WHERE ID = '{ID}'";
-            var affectedRows = dbConnection.Execute(sqlCommand);
-            return Ok(affectedRows);
+            string sqlOrder = $"DELETE FROM sale_order WHERE UserID = '{ID}'";
+            var orderRows = dbConnection.Execute(sqlOrder);
+            string sqlUser = $"DELETE FROM user WHERE ID = '{ID}'";
+            var userRows = dbConnection.Execute(sqlUser);
+            return Ok(userRows);
         }
     }
 }

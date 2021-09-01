@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
     [EnableCors("SHOES_PROJECT")]
     public class ProductController : Controller
     {
-        // Chuỗi kết nối den DB
+        // Chuỗi kết nối đến DB
         string connection = "" +
             "Host = localhost;" +
             "Port = 3306;" +

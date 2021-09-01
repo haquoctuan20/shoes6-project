@@ -55,10 +55,6 @@ namespace WebAPI.Controllers
         {
             IDbConnection dbConnection = new MySqlConnection(connection);
 
-            //Lấy số lượng phần tử
-            var sqlCountSaleOrder = "SELECT COUNT(*) FROM sale_order";
-            int rowCountSaleOrder = dbConnection.ExecuteScalar<int>(sqlCountSaleOrder);
-
             //Khởi tạo DynamicParameters
             DynamicParameters dynamicParameters = new DynamicParameters();
 
@@ -76,7 +72,11 @@ namespace WebAPI.Controllers
                 var propValue = prop.GetValue(_order);
                 if (propName == "ID")
                 {
-                    propValue = rowCountSaleOrder + 100;
+                    continue;
+                }
+                else if (propName == "Status")
+                {
+                    propValue = "Chờ xác nhận";
                 }
                 else if (propName == "UpdatedAt")
                 {
@@ -94,7 +94,10 @@ namespace WebAPI.Controllers
             string sqlInsertOrder = $"INSERT INTO sale_order ({fieldName}) VALUES ({fieldValue})";
             var affectedOrderRows = dbConnection.Execute(sqlInsertOrder, param: dynamicParameters);
 
-            return Ok(affectedOrderRows);
+            string sqlCmd = "SELECT* FROM sale_order ORDER BY ID DESC";
+            var order = dbConnection.Query<sale_order>(sqlCmd).FirstOrDefault();
+
+            return Ok(order.ID);
         }
 
         /// <summary>
@@ -158,9 +161,9 @@ namespace WebAPI.Controllers
             // Khởi tạo DynamicParameters
             DynamicParameters dynamicParameters = new DynamicParameters();
             // Câu lệnh sql
-            string sqlCommand = $"DELETE FROM sale_order WHERE ID = '{ID}'";
-            var affectedRows = dbConnection.Execute(sqlCommand);
-            return Ok(affectedRows);
+            string sqlOrder = $"DELETE FROM sale_order WHERE ID = '{ID}'";
+            var orderRows = dbConnection.Execute(sqlOrder);
+            return Ok(orderRows);
         }
     }
 }

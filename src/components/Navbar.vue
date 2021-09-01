@@ -122,7 +122,7 @@
 <script>
 import Cart from "@/views/user/cart-tanh/Cart.vue";
 import { mapActions, mapGetters } from "vuex";
-
+import axios from "axios";
 export default {
   components: {
     Cart,
@@ -131,12 +131,7 @@ export default {
     ...mapGetters(["userLogin", "listProducts"]),
   },
   data: () => ({
-    listCollection: [
-      "GIÀY BÓNG ĐÁ",
-      "GIÀY CHẠY BỘ",
-      "GIÀY  THỜI TRANG",
-      "DÉP THỜI TRANG",
-    ],
+    listCollection: [],
     dialog: false,
   }),
   methods: {
@@ -166,12 +161,31 @@ export default {
       this.dialog = false;
       this.getSnackBars("Bạn vừa đăng xuất!");
       this.logoutUser();
-      this.$router.push("/");
+      this.$router.push("/login");
     },
 
     testSnackbar() {
       this.getSnackBars("Tim kiếm đang phát triển");
     },
+
+    async getCategoryData() {
+      try {
+        const response = await axios.get(
+          "https://localhost:44380/category/all"
+        );
+        this.listCollection = response.data.map((o, i) => {
+          if (i < 4) {
+            return o.name;
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+
+  created() {
+    this.getCategoryData();
   },
 };
 </script>
@@ -199,6 +213,7 @@ a {
   display: inline-block;
   padding: 0px 10px;
   transition: var(--tran03);
+  text-transform: uppercase;
 }
 .nav-menu-item:hover {
   font-weight: 500;

@@ -6,11 +6,11 @@
         <v-dialog v-model="dialog" persistent max-width="500">
           <v-card>
             <v-card-title class="text-h5">
-              Bạn có muốn xóa sản phẩm: <br />
-              {{ productDelete.name }}?
+              Bạn có muốn xóa danh mục: <br />
+              {{ categoryDelete.name }}?
             </v-card-title>
             <v-card-text>
-              {{ productDelete.name }}
+              {{ categoryDelete.name }}
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -28,138 +28,105 @@
 
     <!-- button thêm mới -->
     <v-btn class="mb-2" depressed color="primary" @click="openAddEdit()">
-      Thêm mới
+      <v-icon dark>
+        mdi-plus
+      </v-icon>
+      Thêm danh mục mới
     </v-btn>
 
     <!-- form thêm mới, chi tiết -->
-    <div class="form-chitiet" v-if="Object.keys(productBySlug).length !== 0">
+    <div class="form-chitiet" v-if="Object.keys(categoryByID).length !== 0">
       <!-- DONG SO 1 -->
       <div class="form-rows">
-        <!-- avatar -->
-        <div class="form-col-row-1" v-if="productBySlug.avatar !== ''">
-          <img :src="require('@/assets'.concat(productBySlug.avatar))" alt="" />
-        </div>
-
-        <div class="form-col-row-1" v-if="productBySlug.avatar === ''">
-          <v-file-input
-            accept="image/png, image/jpeg, image/bmp"
-            placeholder="Chọn ảnh sản phẩm"
-            prepend-icon="mdi-camera"
-            label="Ảnh sản phẩm 1"
-          ></v-file-input>
-
-          <v-file-input
-            accept="image/png, image/jpeg, image/bmp"
-            placeholder="Chọn ảnh sản phẩm"
-            prepend-icon="mdi-camera"
-            label="Ảnh sản phẩm 2"
-          ></v-file-input>
-        </div>
-
-        <div class="form-col-row-1" v-if="productBySlug.avatar !== ''">
-          <img
-            :src="require('@/assets'.concat(productBySlug.avatarr))"
-            alt=""
-          />
-        </div>
-
-        <div class="form-col-row-1" v-if="productBySlug.avatar === ''"></div>
-
-        <!-- COT SO 2 -->
+        <!-- COT SO 1 -->
         <div class="form-col-row-1">
           <v-text-field
-            label="ID sản phẩm"
-            v-model="productBySlug.id"
-            disabled
+            label="ID Danh mục"
+            v-model="categoryByID.id"
             prepend-icon="mdi-group"
           ></v-text-field>
 
           <v-text-field
-            label="ID Category"
-            v-model="productBySlug.categoryID"
+            label="Tên danh mục"
+            v-model="categoryByID.name"
           ></v-text-field>
 
           <v-text-field
-            label="Tên sản phẩm"
-            v-model="productBySlug.name"
-          ></v-text-field>
-
-          <v-text-field
-            label="Slug sản phẩm"
-            v-model="productBySlug.slug"
-          ></v-text-field>
-
-          <v-text-field
-            label="Chất liệu sản phẩm"
-            v-model="productBySlug.material"
+            label="Slug danh mục"
+            v-model="categoryByID.slug"
           ></v-text-field>
         </div>
-
-        <!-- COT SO 3 -->
         <div class="form-col-row-1">
-          <v-text-field
-            label="Đánh giá sao"
-            v-model="productBySlug.rate"
-            disabled
-          ></v-text-field>
-
-          <v-text-field
-            label="Số lượng còn"
-            v-model="productBySlug.quantity"
-          ></v-text-field>
-
-          <v-text-field label="Giá gốc" v-model="originPrice"></v-text-field>
-
-          <v-text-field label="Giá đang bán" v-model="salePrice"></v-text-field>
-
-          <v-text-field
-            label="Loại giày"
-            v-model="productBySlug.type"
-          ></v-text-field>
-        </div>
-      </div>
-
-      <!-- DONG SO 2 -->
-      <div class="form-rows ">
-        <!-- COT SO 1 -->
-        <div class="form-col-row-222">
-          <v-textarea
-            class="pt-4"
-            label="Mô tả"
-            v-model="productBySlug.description"
-          ></v-textarea>
-        </div>
-
-        <!-- COT SO 2 -->
-        <div class="form-col-row-222">
-          <v-text-field
-            label="Màu sắc"
-            v-model="productBySlug.color"
-          ></v-text-field>
-
-          <v-text-field
-            label="Kích thước giày"
-            v-model="productBySlug.size"
-          ></v-text-field>
-        </div>
-
-        <!-- COT SO 3 -->
-        <div class="form-col-row-222">
           <button class="btn-admin" @click="cancelAddEdit()">
             Đồng ý
           </button>
           <button class="btn-admin btn-admin-cancel " @click="cancelAddEdit()">
             Hủy
           </button>
-          <button class="btn-admin btn-admin-cancel " @click="openTable()">
-            Danh sách sản phẩm
-          </button>
         </div>
       </div>
     </div>
 
     <!-- table -->
-    <v-simple-table fixed-header height="80vh">
+
+    <div v-if="categoryBySlug.length > 0">
+      <h2>Danh sách sản phẩm của danh mục: {{ categoryBySlug[0].slug }}</h2>
+      <v-simple-table class="mb-4" fixed-header>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="">
+                STT
+              </th>
+              <th class="">
+                ID Sản phẩm
+              </th>
+              <th class="">
+                Tên sản phẩm
+              </th>
+              <th class="">
+                Giá gốc
+              </th>
+              <th class="">
+                Giá bán
+              </th>
+              <th class="">
+                Loại
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in categoryBySlug" :key="item.id">
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>
+                {{
+                  item.originPrice
+                    ? item.originPrice.toLocaleString("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      })
+                    : 0
+                }}
+              </td>
+              <td>
+                {{
+                  item.salePrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })
+                }}
+              </td>
+              <td>{{ item.type }}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </div>
+
+    <!-- table -->
+    <v-simple-table fixed-header>
       <template v-slot:default>
         <thead>
           <tr>
@@ -167,19 +134,13 @@
               STT
             </th>
             <th class="">
-              ID Sản phẩm
+              ID Danh mục
             </th>
             <th class="">
-              Tên sản phẩm
+              Tên Danh mục
             </th>
             <th class="">
-              Giá gốc
-            </th>
-            <th class="">
-              Giá bán
-            </th>
-            <th class="">
-              Loại
+              Slug Danh mục
             </th>
             <th class="">
               Chức năng
@@ -188,44 +149,43 @@
         </thead>
         <tbody>
           <tr
-            v-for="(item, index) in products"
+            v-for="(item, index) in category"
             :key="item.id"
-            @dblclick="getProductDataBySlug(item)"
+            @dblclick="getCategoryDataBySlug(item)"
           >
             <td>{{ index + 1 }}</td>
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
+            <td>{{ item.slug }}</td>
+
             <td>
-              {{
-                item.originPrice
-                  ? item.originPrice.toLocaleString("vi-VN", {
-                      style: "currency",
-                      currency: "VND",
-                    })
-                  : 0
-              }}
-            </td>
-            <td>
-              {{
-                item.salePrice.toLocaleString("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                })
-              }}
-            </td>
-            <td>{{ item.type }}</td>
-            <td>
-              <v-btn small color="cyan" @click="getProductDataBySlug(item)">
+              <v-btn
+                small
+                class="mr-2"
+                color="cyan"
+                @click="getCategoryDataBySlug(item)"
+              >
+                <v-icon dark>
+                  mdi-format-list-text
+                </v-icon>
+              </v-btn>
+
+              <v-btn
+                small
+                class="mr-2"
+                color="cyan"
+                @click="getCategoryDataByID(item)"
+              >
                 <v-icon dark>
                   mdi-pencil
                 </v-icon>
               </v-btn>
 
               <v-btn
-                class="ml-2 color-minus"
+                class=" color-minus"
                 small
                 color="cyan"
-                @click="openDeleteProduct(item)"
+                @click="openDeleteCategory(item)"
               >
                 <v-icon dark>
                   mdi-minus
@@ -244,53 +204,40 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    products: [],
+    category: [],
     dialog: false,
-    productDelete: {},
-    productBySlug: {},
-    originPrice: 0,
-    salePrice: 0,
+
+    categoryBySlug: [],
+    categoryDelete: {},
+    categoryByID: {},
   }),
 
   methods: {
-    async getProductData() {
+    async getCategoryData() {
       try {
-        const response = await axios.get("https://localhost:44380/product/all");
-        this.products = response.data;
-        console.log(this.products);
+        const response = await axios.get(
+          "https://localhost:44380/category/all"
+        );
+        this.category = response.data;
+        console.log(this.category);
       } catch (error) {
         console.error(error);
       }
     },
 
-    openDeleteProduct(item) {
+    openDeleteCategory(item) {
       this.dialog = true;
-      this.productDelete = item;
+      this.categoryDelete = item;
     },
 
-    async getProductDataBySlug(item) {
+    async getCategoryDataBySlug(item) {
       try {
         const response = await axios.get(
-          `https://localhost:44380/product/${item.slug}`
+          `https://localhost:44380/category/${item.slug}`
         );
-        this.productBySlug = response.data;
+        this.categoryBySlug = response.data;
 
-        if (this.productBySlug.originPrice) {
-          this.originPrice = this.productBySlug.originPrice.toLocaleString(
-            "vi-VN",
-            {
-              style: "currency",
-              currency: "VND",
-            }
-          );
-        }
-
-        this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        });
-
-        console.log(this.productBySlug);
+        console.log(this.categoryBySlug);
 
         window.scrollTo(0, 0);
       } catch (error) {
@@ -299,32 +246,22 @@ export default {
     },
 
     cancelAddEdit() {
-      this.productBySlug = {};
+      this.categoryByID = {};
     },
 
     openAddEdit() {
-      this.productBySlug = {
-        avatar: "",
-        avatarr: "",
-        categoryID: "",
-        color: "",
+      this.categoryByID = {
         createdAt: null,
-        description: "",
         id: "",
-        material: "",
         name: "",
-        originPrice: 0,
-        quantity: 0,
-        rate: 0,
-        salePrice: 0,
-        size: "",
         slug: "",
-        type: "",
         updatedAt: null,
       };
+    },
 
-      this.originPrice = 0;
-      this.salePrice = 0;
+    getCategoryDataByID(item) {
+      this.categoryByID = item;
+      console.log(this.categoryByID);
     },
 
     openTable() {
@@ -333,7 +270,7 @@ export default {
   },
 
   created() {
-    this.getProductData();
+    this.getCategoryData();
   },
 };
 </script>
@@ -343,6 +280,7 @@ export default {
   margin: 0px !important;
   padding: 0px !important;
 }
+
 table tr {
   cursor: pointer;
 }

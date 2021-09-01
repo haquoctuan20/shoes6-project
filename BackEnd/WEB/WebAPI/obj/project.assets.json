@@ -267,11 +267,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
+      "projectPath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\WebAPI.csproj",
       "packagesPath": "C:\\Users\\haquo\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\BackEnd\\WEB\\WebAPI\\obj\\",
+      "outputPath": "D:\\Users\\Documents\\Dang hoc Nam 4 ki 1\\Ma nguon mo\\VueJS\\shoes6-project\\BackEnd\\WEB\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\haquo\\AppData\\Roaming\\NuGet\\NuGet.Config",
