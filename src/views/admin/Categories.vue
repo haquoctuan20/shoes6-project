@@ -66,6 +66,7 @@
         </div>
       </div>
     </div>
+    <Loading v-if="loading" />
 
     <!-- table -->
 
@@ -196,13 +197,17 @@
         </tbody>
       </template>
     </v-simple-table>
+
+    <Loading v-if="loading" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loading from "@/components/Loading.vue";
 
 export default {
+  components: { Loading },
   data: () => ({
     category: [],
     dialog: false,
@@ -210,16 +215,20 @@ export default {
     categoryBySlug: [],
     categoryDelete: {},
     categoryByID: {},
+
+    loading: false,
   }),
 
   methods: {
     async getCategoryData() {
+      this.loading = true;
       try {
         const response = await axios.get(
           "https://localhost:44380/category/all"
         );
         this.category = response.data;
         console.log(this.category);
+        this.loading = false;
       } catch (error) {
         console.error(error);
       }
@@ -231,6 +240,7 @@ export default {
     },
 
     async getCategoryDataBySlug(item) {
+      this.loading = true;
       try {
         const response = await axios.get(
           `https://localhost:44380/category/${item.slug}`
@@ -240,6 +250,8 @@ export default {
         console.log(this.categoryBySlug);
 
         window.scrollTo(0, 0);
+
+        this.loading = false;
       } catch (error) {
         console.error(error);
       }
