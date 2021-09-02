@@ -17,7 +17,7 @@
               <v-btn color="green darken-1" text @click="dialog = false">
                 Hủy
               </v-btn>
-              <v-btn color="green darken-1" text @click="dialog = false">
+              <v-btn color="green darken-1" text @click="deleleCategoryByID">
                 Xóa
               </v-btn>
             </v-card-actions>
@@ -34,6 +34,18 @@
       Thêm danh mục mới
     </v-btn>
 
+    <v-btn
+      class="mb-2 ml-2"
+      depressed
+      color="primary"
+      @click="getCategoryData()"
+    >
+      <v-icon dark>
+        mdi-refresh
+      </v-icon>
+      Làm mới danh sách
+    </v-btn>
+
     <!-- form thêm mới, chi tiết -->
     <div class="form-chitiet" v-if="Object.keys(categoryByID).length !== 0">
       <!-- DONG SO 1 -->
@@ -44,6 +56,7 @@
             label="ID Danh mục"
             v-model="categoryByID.id"
             prepend-icon="mdi-group"
+            readonly
           ></v-text-field>
 
           <v-text-field
@@ -57,8 +70,20 @@
           ></v-text-field>
         </div>
         <div class="form-col-row-1">
-          <button class="btn-admin" @click="cancelAddEdit()">
-            Đồng ý
+          <button
+            class="btn-admin"
+            v-if="btnAdd === true"
+            @click="addCategory()"
+          >
+            Thêm
+          </button>
+
+          <button
+            class="btn-admin"
+            v-if="btnEdit === true"
+            @click="editCategory()"
+          >
+            Sửa
           </button>
           <button class="btn-admin btn-admin-cancel " @click="cancelAddEdit()">
             Hủy
@@ -205,7 +230,7 @@
 <script>
 import axios from "axios";
 import Loading from "@/components/Loading.vue";
-
+import { mapActions } from "vuex";
 export default {
   components: { Loading },
   data: () => ({
@@ -217,10 +242,16 @@ export default {
     categoryByID: {},
 
     loading: false,
+
+    btnAdd: false,
+    btnEdit: false,
   }),
 
   methods: {
+    ...mapActions(["getSnackBars"]),
+
     async getCategoryData() {
+      this.categoryBySlug = [];
       this.loading = true;
       try {
         const response = await axios.get(
@@ -257,11 +288,39 @@ export default {
       }
     },
 
+    editCategory() {
+      console.log(this.categoryDelete);
+
+      const me = this;
+      axios
+        .put(
+          `https://localhost:44380/category/${me.categoryDelete.id}`,
+          me.categoryDelete
+        )
+        .then(function(response) {
+          me.getSnackBars(
+            `Đã cập nhật thông tin cho ${me.categoryDelete.username} !`
+          );
+          me.getUserData();
+          me.categoryDelete = {};
+          console.log(response);
+        })
+        .catch(function(error) {
+          me.getSnackBars("Cập nhật thất bại!");
+          me.getUserData;
+          me.categoryDelete = {};
+          console.log(error);
+        });
+    },
+
     cancelAddEdit() {
       this.categoryByID = {};
     },
 
     openAddEdit() {
+      this.btnAdd = true;
+      this.btnEdit = false;
+
       this.categoryByID = {
         createdAt: null,
         id: "",
@@ -271,9 +330,55 @@ export default {
       };
     },
 
+    addCategory() {
+      console.log(this.categoryByID);
+
+      const me = this;
+      if (this.categoryByID.name === "" || this.categoryByID.slug === "") {
+        this.getSnackBars("Bạn chưa nhập đầy đủ thông tin!");
+      } else {
+        axios
+          .post("https://localhost:44380/category", this.categoryByID)
+          .then(function(response) {
+            me.getSnackBars("Thêm mới thành công!");
+            me.getCategoryData();
+            console.log(response);
+            me.categoryByID = {};
+          })
+          .catch(function(error) {
+            me.getSnackBars("Thêm mới thất bại!");
+            me.getCategoryData;
+            console.log(error);
+          });
+      }
+    },
+
     getCategoryDataByID(item) {
       this.categoryByID = item;
+      this.btnAdd = false;
+      this.btnEdit = true;
       console.log(this.categoryByID);
+    },
+
+    deleleCategoryByID() {
+      this.dialog = false;
+      console.log(this.categoryDelete);
+
+      const me = this;
+      axios
+        .delete(`https://localhost:44380/category/${me.categoryDelete.id}`)
+        .then(function(response) {
+          me.getSnackBars(`Đã xóa ${me.categoryDelete.name} !`);
+          me.getCategoryData();
+          me.categoryDelete = {};
+          console.log(response);
+        })
+        .catch(function(error) {
+          me.getSnackBars("Xóa thất bại!");
+          me.getCategoryData;
+          me.categoryDelete = {};
+          console.log(error);
+        });
     },
 
     openTable() {

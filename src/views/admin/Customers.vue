@@ -197,6 +197,8 @@ export default {
     ...mapActions(["getSnackBars"]),
 
     async getUserData() {
+      this.cancelAddEdit();
+
       try {
         const response = await axios.get("https://localhost:44380/user/all");
         this.users = response.data;

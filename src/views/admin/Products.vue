@@ -17,7 +17,7 @@
               <v-btn color="green darken-1" text @click="dialog = false">
                 Hủy
               </v-btn>
-              <v-btn color="green darken-1" text @click="dialog = false">
+              <v-btn color="green darken-1" text @click="deleteProductByID">
                 Xóa
               </v-btn>
             </v-card-actions>
@@ -31,7 +31,19 @@
       <v-icon dark>
         mdi-plus
       </v-icon>
-      Thêm mới
+      Thêm sản phẩm mới
+    </v-btn>
+
+    <v-btn
+      class="mb-2 ml-2"
+      depressed
+      color="primary"
+      @click="getProductData()"
+    >
+      <v-icon dark>
+        mdi-refresh
+      </v-icon>
+      Làm mới danh sách
     </v-btn>
 
     <!-- form thêm mới, chi tiết -->
@@ -77,10 +89,12 @@
             prepend-icon="mdi-group"
           ></v-text-field>
 
-          <v-text-field
-            label="ID Category"
+          <v-combobox
             v-model="productBySlug.categoryID"
-          ></v-text-field>
+            :items="categoryID"
+            label="ID Danh mục"
+            chips
+          ></v-combobox>
 
           <v-text-field
             label="Tên sản phẩm"
@@ -148,8 +162,8 @@
 
         <!-- COT SO 3 -->
         <div class="form-col-row-222">
-          <button class="btn-admin" @click="cancelAddEdit()">
-            Đồng ý
+          <button class="btn-admin" @click="editProduct()">
+            Lưu thay đổi
           </button>
           <button class="btn-admin btn-admin-cancel " @click="cancelAddEdit()">
             Hủy
@@ -244,18 +258,76 @@
 
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   data: () => ({
     products: [],
     dialog: false,
+
     productDelete: {},
     productBySlug: {},
+
     originPrice: 0,
     salePrice: 0,
+
+    categoryID: [],
   }),
 
   methods: {
+    ...mapActions(["getSnackBars"]),
+
+    deleteProductByID() {
+      this.dialog = false;
+
+      const me = this;
+      console.log(me.productDelete);
+      axios
+        .delete(`https://localhost:44380/product/${me.productDelete.id}`)
+        .then(function(response) {
+          me.getSnackBars(`Đã xóa ${me.productDelete.username} !`);
+          me.getProductData();
+          me.productDelete = {};
+          console.log(response);
+        })
+        .catch(function(error) {
+          me.getSnackBars("Xóa thất bại! ");
+          me.getProductData();
+          me.productDelete = {};
+          console.log(error);
+        });
+    },
+
+    editProduct() {
+      if (this.originPrice !== 0) {
+        this.productBySlug.originPrice =
+          parseInt(this.originPrice.split(".")) * 1000;
+      }
+
+      this.productBySlug.salePrice = parseInt(this.salePrice.split(".")) * 1000;
+
+      const me = this;
+      axios
+        .put(
+          `https://localhost:44380/product/${me.productBySlug.id}`,
+          me.productBySlug
+        )
+        .then(function(response) {
+          me.getSnackBars(
+            `Đã cập nhật thông tin cho ${me.productBySlug.name} !`
+          );
+          me.getProductData();
+          me.productBySlug = {};
+          console.log(response);
+        })
+        .catch(function(error) {
+          me.getSnackBars("Cập nhật thất bại!");
+          me.getProductData();
+          me.productBySlug = {};
+          console.log(error);
+        });
+    },
+
     async getProductData() {
       try {
         const response = await axios.get("https://localhost:44380/product/all");
@@ -286,12 +358,21 @@ export default {
               currency: "VND",
             }
           );
+        } else {
+          this.productBySlug.originPrice = 0;
         }
 
-        this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        });
+        if (this.productBySlug.salePrice) {
+          this.salePrice = this.productBySlug.salePrice.toLocaleString(
+            "vi-VN",
+            {
+              style: "currency",
+              currency: "VND",
+            }
+          );
+        } else {
+          this.productBySlug.salePrice = 0;
+        }
 
         console.log(this.productBySlug);
 
@@ -333,10 +414,23 @@ export default {
     openTable() {
       window.scrollTo(0, 600);
     },
+
+    async getCategoryData() {
+      try {
+        const response = await axios.get(
+          "https://localhost:44380/category/all"
+        );
+        this.categoryID = response.data.map((o) => o.id);
+        console.log(this.category);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 
   created() {
     this.getProductData();
+    this.getCategoryData();
   },
 };
 </script>
