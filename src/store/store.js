@@ -19,44 +19,7 @@ export const store = new Vuex.Store({
     },
 
     // Tuan anh
-    listProducts: [
-      {
-        id: "1",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 1,
-        price: 756,
-        image: "shoe2.jpg",
-      },
-      {
-        id: "2",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 2,
-        price: 756,
-        image: "shoe2.jpg",
-      },
-      {
-        id: "3",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 3,
-        price: 756,
-        image: "shoe2.jpg",
-      },
-      {
-        id: "4",
-        title: "Derby shoe - sandal",
-        size: 7,
-        material: "rubber",
-        quantity: 4,
-        price: 756,
-        image: "shoe2.jpg",
-      },
-    ],
+    listProducts: [],
   },
 
   getters: {
@@ -105,6 +68,23 @@ export const store = new Vuex.Store({
         status: false,
       };
     },
+
+    // add to list TA
+    addProductToList(state, product) {
+      let push = true;
+      state.listProducts.map((item) => {
+        if (item.id === product.id) {
+          console.log("object");
+          push = false;
+          item.quantity += product.quantity;
+        }
+      });
+
+      if (push) {
+        state.listProducts.push(product);
+      }
+      console.log(state.listProducts);
+    },
   },
 
   actions: {
@@ -137,6 +117,10 @@ export const store = new Vuex.Store({
 
     closeSnackBars({ commit }) {
       commit("closeSnackBars");
+    },
+
+    addProductToList({ commit }, product) {
+      commit("addProductToList", product);
     },
   },
 });

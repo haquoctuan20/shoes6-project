@@ -1,329 +1,147 @@
 <template>
   <div class="checkout-form">
     <div class="nav" style="font-size: 14px">
-      <span style="color: #aaa;">Cart</span>
+      <span style="color: #aaa;">Giỏ hàng</span>
       <span>&ensp;>&ensp;</span>
-      <span>Information</span>
+      <span>Thông tin</span>
       <span>&ensp;>&ensp;</span>
-      <span style="color: #aaa;">Shipping</span>
+      <span style="color: #aaa;">Vận chuyển</span>
       <span>&ensp;>&ensp;</span>
-      <span style="color: #aaa;">Payment</span>
+      <span style="color: #aaa;">Thanh toán</span>
     </div>
-    <h5 style="margin-top: 20px">Contact information</h5>
+    <h5 style="margin-top: 20px">Thông tin liên hệ</h5>
     <div class="account">
       <div class="avatar"></div>
       <div class="info">
         <div>haha hihi (hki92076@eoopy.com)</div>
         <div>
-          <a href="" style="color: #cbba9c; text-decoration: none">Log out</a>
+          <a href="" style="color: #cbba9c; text-decoration: none">Đăng xuất</a>
         </div>
       </div>
     </div>
     <div style="margin-top: 20px">
       <input type="checkbox" name="check" style="width: 18px; height: 18px" />
       <label for="check" style="margin-left: 10px">
-        Keep me up to date on news and offers</label
+        Nhận các thông tin sản phẩm và khuyến mại</label
       >
     </div>
 
-    <h5 style="margin-top: 32px">Shipping address</h5>
+    <h5 style="margin-top: 32px">Phí vận chuyển</h5>
 
     <form style="margin-top: 10px">
       <div class="form-row">
         <div class="user-input-wrp form-group col-md-6">
           <br />
-          <input type="text" class="inputText" required />
-          <span class="floating-label">First name (optional)</span>
+          <input type="text" class="inputText" id="ho" required />
+          <span class="floating-label">Họ</span>
         </div>
 
         <div class="user-input-wrp form-group col-md-6">
           <br />
-          <input type="text" class="inputText" required />
-          <span class="floating-label">Last name</span>
+          <input type="text" class="inputText" id="ten" required />
+          <span class="floating-label">Tên</span>
         </div>
 
         <div class="user-input-wrp form-group col-md-12">
           <br />
-          <input type="text" class="inputText" required />
-          <span class="floating-label">Address</span>
+          <input type="text" class="inputText" id="xa" required />
+          <span class="floating-label">Phường, Xã</span>
         </div>
         <div class="user-input-wrp form-group col-md-12">
           <br />
-          <input type="text" class="inputText" required />
-          <span class="floating-label">Apartment, suite, etc. (optional)</span>
+          <input type="text" class="inputText" id="huyen" required />
+          <span class="floating-label">Quận, Huyện</span>
         </div>
 
         <div class="user-input-wrp form-group col-md-6">
           <br />
-          <select class="inputText">
-            <option selected>Country</option>
-            <option value="Afganistan">Afghanistan</option>
-            <option value="Albania">Albania</option>
-            <option value="Algeria">Algeria</option>
-            <option value="American Samoa">American Samoa</option>
-            <option value="Andorra">Andorra</option>
-            <option value="Angola">Angola</option>
-            <option value="Anguilla">Anguilla</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Armenia">Armenia</option>
-            <option value="Aruba">Aruba</option>
-            <option value="Australia">Australia</option>
-            <option value="Austria">Austria</option>
-            <option value="Azerbaijan">Azerbaijan</option>
-            <option value="Bahamas">Bahamas</option>
-            <option value="Bahrain">Bahrain</option>
-            <option value="Bangladesh">Bangladesh</option>
-            <option value="Barbados">Barbados</option>
-            <option value="Belarus">Belarus</option>
-            <option value="Belgium">Belgium</option>
-            <option value="Belize">Belize</option>
-            <option value="Benin">Benin</option>
-            <option value="Bermuda">Bermuda</option>
-            <option value="Bhutan">Bhutan</option>
-            <option value="Bolivia">Bolivia</option>
-            <option value="Bonaire">Bonaire</option>
-            <option value="Botswana">Botswana</option>
-            <option value="Brazil">Brazil</option>
-            <option value="British Indian Ocean Ter">
-              British Indian Ocean Ter
-            </option>
-            <option value="Brunei">Brunei</option>
-            <option value="Bulgaria">Bulgaria</option>
-            <option value="Burkina Faso">Burkina Faso</option>
-            <option value="Burundi">Burundi</option>
-            <option value="Cambodia">Cambodia</option>
-            <option value="Cameroon">Cameroon</option>
-            <option value="Canada">Canada</option>
-            <option value="Canary Islands">Canary Islands</option>
-            <option value="Cape Verde">Cape Verde</option>
-            <option value="Cayman Islands">Cayman Islands</option>
-            <option value="Central African Republic">
-              Central African Republic
-            </option>
-            <option value="Chad">Chad</option>
-            <option value="Channel Islands">Channel Islands</option>
-            <option value="Chile">Chile</option>
-            <option value="China">China</option>
-            <option value="Christmas Island">Christmas Island</option>
-            <option value="Cocos Island">Cocos Island</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Comoros">Comoros</option>
-            <option value="Congo">Congo</option>
-            <option value="Cook Islands">Cook Islands</option>
-            <option value="Costa Rica">Costa Rica</option>
-            <option value="Cote DIvoire">Cote DIvoire</option>
-            <option value="Croatia">Croatia</option>
-            <option value="Cuba">Cuba</option>
-            <option value="Curaco">Curacao</option>
-            <option value="Cyprus">Cyprus</option>
-            <option value="Czech Republic">Czech Republic</option>
-            <option value="Denmark">Denmark</option>
-            <option value="Djibouti">Djibouti</option>
-            <option value="Dominica">Dominica</option>
-            <option value="Dominican Republic">Dominican Republic</option>
-            <option value="East Timor">East Timor</option>
-            <option value="Ecuador">Ecuador</option>
-            <option value="Egypt">Egypt</option>
-            <option value="El Salvador">El Salvador</option>
-            <option value="Equatorial Guinea">Equatorial Guinea</option>
-            <option value="Eritrea">Eritrea</option>
-            <option value="Estonia">Estonia</option>
-            <option value="Ethiopia">Ethiopia</option>
-            <option value="Falkland Islands">Falkland Islands</option>
-            <option value="Faroe Islands">Faroe Islands</option>
-            <option value="Fiji">Fiji</option>
-            <option value="Finland">Finland</option>
-            <option value="France">France</option>
-            <option value="French Guiana">French Guiana</option>
-            <option value="French Polynesia">French Polynesia</option>
-            <option value="French Southern Ter">French Southern Ter</option>
-            <option value="Gabon">Gabon</option>
-            <option value="Gambia">Gambia</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Germany">Germany</option>
-            <option value="Ghana">Ghana</option>
-            <option value="Gibraltar">Gibraltar</option>
-            <option value="Great Britain">Great Britain</option>
-            <option value="Greece">Greece</option>
-            <option value="Greenland">Greenland</option>
-            <option value="Grenada">Grenada</option>
-            <option value="Guadeloupe">Guadeloupe</option>
-            <option value="Guam">Guam</option>
-            <option value="Guatemala">Guatemala</option>
-            <option value="Guinea">Guinea</option>
-            <option value="Guyana">Guyana</option>
-            <option value="Haiti">Haiti</option>
-            <option value="Hawaii">Hawaii</option>
-            <option value="Honduras">Honduras</option>
-            <option value="Hong Kong">Hong Kong</option>
-            <option value="Hungary">Hungary</option>
-            <option value="Iceland">Iceland</option>
-            <option value="Indonesia">Indonesia</option>
-            <option value="India">India</option>
-            <option value="Iran">Iran</option>
-            <option value="Iraq">Iraq</option>
-            <option value="Ireland">Ireland</option>
-            <option value="Isle of Man">Isle of Man</option>
-            <option value="Israel">Israel</option>
-            <option value="Italy">Italy</option>
-            <option value="Jamaica">Jamaica</option>
-            <option value="Japan">Japan</option>
-            <option value="Jordan">Jordan</option>
-            <option value="Kazakhstan">Kazakhstan</option>
-            <option value="Kenya">Kenya</option>
-            <option value="Kiribati">Kiribati</option>
-            <option value="Korea North">Korea North</option>
-            <option value="Korea Sout">Korea South</option>
-            <option value="Kuwait">Kuwait</option>
-            <option value="Kyrgyzstan">Kyrgyzstan</option>
-            <option value="Laos">Laos</option>
-            <option value="Latvia">Latvia</option>
-            <option value="Lebanon">Lebanon</option>
-            <option value="Lesotho">Lesotho</option>
-            <option value="Liberia">Liberia</option>
-            <option value="Libya">Libya</option>
-            <option value="Liechtenstein">Liechtenstein</option>
-            <option value="Lithuania">Lithuania</option>
-            <option value="Luxembourg">Luxembourg</option>
-            <option value="Macau">Macau</option>
-            <option value="Macedonia">Macedonia</option>
-            <option value="Madagascar">Madagascar</option>
-            <option value="Malaysia">Malaysia</option>
-            <option value="Malawi">Malawi</option>
-            <option value="Maldives">Maldives</option>
-            <option value="Mali">Mali</option>
-            <option value="Malta">Malta</option>
-            <option value="Marshall Islands">Marshall Islands</option>
-            <option value="Martinique">Martinique</option>
-            <option value="Mauritania">Mauritania</option>
-            <option value="Mauritius">Mauritius</option>
-            <option value="Mayotte">Mayotte</option>
-            <option value="Mexico">Mexico</option>
-            <option value="Midway Islands">Midway Islands</option>
-            <option value="Moldova">Moldova</option>
-            <option value="Monaco">Monaco</option>
-            <option value="Mongolia">Mongolia</option>
-            <option value="Montserrat">Montserrat</option>
-            <option value="Morocco">Morocco</option>
-            <option value="Mozambique">Mozambique</option>
-            <option value="Myanmar">Myanmar</option>
-            <option value="Nambia">Nambia</option>
-            <option value="Nauru">Nauru</option>
-            <option value="Nepal">Nepal</option>
-            <option value="Netherland Antilles">Netherland Antilles</option>
-            <option value="Netherlands">Netherlands (Holland, Europe)</option>
-            <option value="Nevis">Nevis</option>
-            <option value="New Caledonia">New Caledonia</option>
-            <option value="New Zealand">New Zealand</option>
-            <option value="Nicaragua">Nicaragua</option>
-            <option value="Niger">Niger</option>
-            <option value="Nigeria">Nigeria</option>
-            <option value="Niue">Niue</option>
-            <option value="Norfolk Island">Norfolk Island</option>
-            <option value="Norway">Norway</option>
-            <option value="Oman">Oman</option>
-            <option value="Pakistan">Pakistan</option>
-            <option value="Palau Island">Palau Island</option>
-            <option value="Palestine">Palestine</option>
-            <option value="Panama">Panama</option>
-            <option value="Papua New Guinea">Papua New Guinea</option>
-            <option value="Paraguay">Paraguay</option>
-            <option value="Peru">Peru</option>
-            <option value="Phillipines">Philippines</option>
-            <option value="Pitcairn Island">Pitcairn Island</option>
-            <option value="Poland">Poland</option>
-            <option value="Portugal">Portugal</option>
-            <option value="Puerto Rico">Puerto Rico</option>
-            <option value="Qatar">Qatar</option>
-            <option value="Republic of Montenegro">
-              Republic of Montenegro
-            </option>
-            <option value="Republic of Serbia">Republic of Serbia</option>
-            <option value="Reunion">Reunion</option>
-            <option value="Romania">Romania</option>
-            <option value="Russia">Russia</option>
-            <option value="Rwanda">Rwanda</option>
-            <option value="St Barthelemy">St Barthelemy</option>
-            <option value="St Eustatius">St Eustatius</option>
-            <option value="St Helena">St Helena</option>
-            <option value="St Kitts-Nevis">St Kitts-Nevis</option>
-            <option value="St Lucia">St Lucia</option>
-            <option value="St Maarten">St Maarten</option>
-            <option value="Saipan">Saipan</option>
-            <option value="Samoa">Samoa</option>
-            <option value="Samoa American">Samoa American</option>
-            <option value="San Marino">San Marino</option>
-            <option value="Saudi Arabia">Saudi Arabia</option>
-            <option value="Senegal">Senegal</option>
-            <option value="Seychelles">Seychelles</option>
-            <option value="Sierra Leone">Sierra Leone</option>
-            <option value="Singapore">Singapore</option>
-            <option value="Slovakia">Slovakia</option>
-            <option value="Slovenia">Slovenia</option>
-            <option value="Solomon Islands">Solomon Islands</option>
-            <option value="Somalia">Somalia</option>
-            <option value="South Africa">South Africa</option>
-            <option value="Spain">Spain</option>
-            <option value="Sri Lanka">Sri Lanka</option>
-            <option value="Sudan">Sudan</option>
-            <option value="Suriname">Suriname</option>
-            <option value="Swaziland">Swaziland</option>
-            <option value="Sweden">Sweden</option>
-            <option value="Switzerland">Switzerland</option>
-            <option value="Syria">Syria</option>
-            <option value="Tahiti">Tahiti</option>
-            <option value="Taiwan">Taiwan</option>
-            <option value="Tajikistan">Tajikistan</option>
-            <option value="Tanzania">Tanzania</option>
-            <option value="Thailand">Thailand</option>
-            <option value="Togo">Togo</option>
-            <option value="Tokelau">Tokelau</option>
-            <option value="Tonga">Tonga</option>
-            <option value="Tunisia">Tunisia</option>
-            <option value="Turkey">Turkey</option>
-            <option value="Turkmenistan">Turkmenistan</option>
-            <option value="Tuvalu">Tuvalu</option>
-            <option value="Uganda">Uganda</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="Ukraine">Ukraine</option>
-            <option value="United Arab Erimates">United Arab Emirates</option>
-            <option value="United States of America">
-              United States of America
-            </option>
-            <option value="Uraguay">Uruguay</option>
-            <option value="Uzbekistan">Uzbekistan</option>
-            <option value="Vanuatu">Vanuatu</option>
-            <option value="Vatican City State">Vatican City State</option>
-            <option value="Venezuela">Venezuela</option>
-            <option value="Vietnam">Vietnam</option>
-            <option value="Virgin Islands (Brit)">
-              Virgin Islands (Brit)
-            </option>
-            <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
-            <option value="Wake Island">Wake Island</option>
-            <option value="Yemen">Yemen</option>
-            <option value="Zaire">Zaire</option>
-            <option value="Zambia">Zambia</option>
-            <option value="Zimbabwe">Zimbabwe</option>
+          <select class="inputText" id="tp">
+            <option selected>Tỉnh, thành phố</option>
+            <option value="An Giang">An Giang</option>
+            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu </option>
+            <option value="Bắc Giang">Bắc Giang </option
+            ><option value="Bắc Kạn">Bắc Kạn </option>
+            <option value="Bạc Liêu">Bạc Liêu </option>
+            <option value="Bắc Ninh">Bắc Ninh </option>
+            <option value="Bến Tre">Bến Tre </option>
+            <option value="Bình Định">Bình Định </option>
+            <option value="Bình Dương">Bình Dương </option>
+            <option value="Bình Phước">Bình Phước </option>
+            <option value="Bình Thuận">Bình Thuận </option>
+            <option value="Bình Thuận">Bình Thuận </option>
+            <option value="Cà Mau">Cà Mau </option>
+            <option value="Cao Bằng">Cao Bằng </option>
+            <option value="Đắk Lắk">Đắk Lắk </option>
+            <option value="Đắk Nông">Đắk Nông </option>
+            <option value="Điện Biên">Điện Biên </option>
+            <option value="Đồng Nai">Đồng Nai </option>
+            <option value="Đồng Tháp">Đồng Tháp </option>
+            <option value="Đồng Tháp">Đồng Tháp </option
+            ><option value="Gia Lai">Gia Lai </option
+            ><option value="Hà Giang">Hà Giang </option
+            ><option value="Hà Nam">Hà Nam </option
+            ><option value="Hà Tĩnh">Hà Tĩnh </option
+            ><option value="Hải Dương">Hải Dương </option
+            ><option value="Hậu Giang">Hậu Giang </option
+            ><option value="Hòa Bình">Hòa Bình </option
+            ><option value="Hưng Yên">Hưng Yên </option
+            ><option value="Khánh Hòa">Khánh Hòa </option
+            ><option value="Kiên Giang">Kiên Giang </option
+            ><option value="Kon Tum">Kon Tum </option
+            ><option value="Lai Châu">Lai Châu </option
+            ><option value="Lâm Đồng">Lâm Đồng </option
+            ><option value="Lạng Sơn">Lạng Sơn </option
+            ><option value="Lào Cai">Lào Cai </option
+            ><option value="Long An">Long An </option
+            ><option value="Nam Định">Nam Định </option
+            ><option value="Nghệ An">Nghệ An </option
+            ><option value="Ninh Bình">Ninh Bình </option
+            ><option value="Ninh Thuận">Ninh Thuận </option
+            ><option value="Phú Thọ">Phú Thọ </option
+            ><option value="Quảng Bình">Quảng Bình </option
+            ><option value="Quảng Bình">Quảng Bình </option
+            ><option value="Quảng Ngãi">Quảng Ngãi </option
+            ><option value="Quảng Ninh">Quảng Ninh </option
+            ><option value="Quảng Trị">Quảng Trị </option
+            ><option value="Sóc Trăng">Sóc Trăng </option
+            ><option value="Sơn La">Sơn La </option
+            ><option value="Tây Ninh">Tây Ninh </option
+            ><option value="Thái Bình">Thái Bình </option
+            ><option value="Thái Nguyên">Thái Nguyên </option
+            ><option value="Thanh Hóa">Thanh Hóa </option
+            ><option value="Thừa Thiên Huế">Thừa Thiên Huế </option
+            ><option value="Tiền Giang">Tiền Giang </option
+            ><option value="Trà Vinh">Trà Vinh </option
+            ><option value="Tuyên Quang">Tuyên Quang </option
+            ><option value="Vĩnh Long">Vĩnh Long </option
+            ><option value="Vĩnh Phúc">Vĩnh Phúc </option
+            ><option value="Yên Bái">Yên Bái </option
+            ><option value="Phú Yên">Phú Yên </option
+            ><option value="Tp.Cần Thơ">Tp.Cần Thơ </option
+            ><option value="Tp.Đà Nẵng">Tp.Đà Nẵng </option
+            ><option value="Tp.Hải Phòng">Tp.Hải Phòng </option
+            ><option value="Tp.Hà Nội">Tp.Hà Nội </option
+            ><option value="TP  HCM">TP HCM </option>
           </select>
+
           <span
             class="floating-label"
             style="top: 0px; left: 10px; font-size: 13px; opacity: 1"
-            >Country/region</span
+            >Tỉnh, Thành phố</span
           >
         </div>
 
         <div class="user-input-wrp form-group col-md-6">
           <br />
-          <input type="text" class="inputText" required />
-          <span class="floating-label">Postal code</span>
+          <input type="text" class="inputText" id="sdt" required />
+          <span class="floating-label">Số điện thoại</span>
         </div>
       </div>
 
       <div style="margin-top: 20px">
-        <button type="submit">Continue to shipping</button>
+        <button @click.prevent="postCart">Thanh Toán</button>
         <a href="" style="margin-left: 20px" @click="openCartDetail"
-          >Return to cart</a
+          >Quay về giỏ hàng</a
         >
       </div>
     </form>
@@ -331,16 +149,136 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapActions } from "vuex";
 export default {
-  props: ["id", "title", "size", "material", "quantity", "price", "image"],
+  props: ["id", "title", "size", "material", "quantity", "price", "avatar"],
 
-  inject: ["deleteItem"],
+  data: () => ({
+    cart: {
+      phone: "b",
+      address: "b",
+      totalMoney: 10,
+      status: 0,
+      userID: null,
+    },
+
+    cartItem: {
+      saleOrderID: 120,
+    },
+
+    listCartItem: [],
+  }),
+
+  // inject: ["deleteItem"],
 
   name: "checkout-form",
 
+  computed: {
+    listProducts() {
+      return this.$store.state.listProducts;
+    },
+
+    cartTotal() {
+      return this.$store.state.listProducts
+        .map((item) => item.price * item.quantity)
+        .reduce((total, amount) => total + amount);
+    },
+  },
+
   methods: {
+    ...mapActions(["getSnackBars"]),
+
     openCartDetail() {
       this.$router.push("/cart-detail");
+    },
+
+    getData() {
+      this.cart.address =
+        document.getElementById("xa").value +
+        ", " +
+        document.getElementById("huyen").value +
+        ", " +
+        document.getElementById("tp").value;
+
+      this.cart.phone = document.getElementById("sdt").value;
+    },
+
+    postCart() {
+      this.getData();
+
+      console.log(this.cart);
+      const me = this;
+
+      // const response = axios.post("https://localhost:44380/cart", this.cart);
+
+      // this.cartItem.saleOrderID = response.data;
+      // console.log(this.cartItem.saleOrderID);
+
+      // const postListCart = await axios.post(
+      //   "https://localhost:44380/cart-item",
+      //   this.cartItem
+      // );
+
+      // console.log("cuoi");
+
+      // this.cart.cartItem = postListCart.data;
+
+      this.cart.userID = this.$store.state.userLogin.id;
+
+      this.cart.status = this.cart.status + "";
+
+      axios
+        .post("https://localhost:44380/cart", this.cart)
+        .then(function(response) {
+          console.log("thanh cong");
+          console.log(response);
+
+          const saleOrderID = response.data;
+
+          me.listProducts.map((item) => {
+            const abc = {
+              saleOrderID: saleOrderID,
+              productID: item.id,
+              number: item.quantity,
+              color: item.color,
+              size: item.size,
+            };
+
+            me.listCartItem.push(abc);
+          });
+
+          console.log(me.cartItem);
+
+          console.log(me.listCartItem);
+
+          const me2 = me;
+
+          axios
+            .post("https://localhost:44380/cart-item", me2.listCartItem)
+            .then(function(res) {
+              console.log(res);
+              console.log("thanh cong cart item");
+              me2.getSnackBars("Đặt hàng thành công!");
+              window.scrollTo(0, 0);
+              this.$store.state.listProducts = [];
+            })
+            .catch(function(err) {
+              console.log(err + "cart item");
+            });
+
+          // console.log("cuoi");
+
+          // this.cart.cartItem = postListCart.data;
+          // alert(this.cartItem.saleOrderID);
+        })
+        .catch(function(error) {
+          console.log("Thất bại!");
+          console.log(error);
+        });
+
+      // console.log(this.cart);
+      // console.log(this.cartItem);
     },
   },
 };

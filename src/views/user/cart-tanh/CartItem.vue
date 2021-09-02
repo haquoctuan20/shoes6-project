@@ -3,7 +3,7 @@
     <div class="item">
       <div class="product-image">
         <a href="" v-bind:title="title"
-          ><img :src="require('../../../assets/img/'.concat(image))"
+          ><img :src="require('../../../assets'.concat(image))"
         /></a>
       </div>
       <div class="product-detail">
@@ -13,7 +13,7 @@
         <div class="quantity-price">
           <span class="quantity">{{ quantity }}</span>
           <span> x </span>
-          <span class="price"> ${{ price }} USD </span>
+          <span class="price"> {{ price }} ₫ </span>
         </div>
       </div>
       <div class="delete-product">

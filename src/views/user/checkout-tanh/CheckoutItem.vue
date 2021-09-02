@@ -2,7 +2,7 @@
   <li class="product-checkout">
     <div class="image">
       <img
-        :src="require('../../../assets/img/'.concat(image))"
+        :src="require('../../../assets'.concat(image))"
         style="max-width: 64px; border: 1px solid #ccc; border-radius: 5px"
         alt=""
       />
@@ -18,14 +18,23 @@
         </div>
       </div>
 
-      <div class="price">${{ price }} USD</div>
+      <div class="price">{{ price }} ₫</div>
     </div>
   </li>
 </template>
 
 <script>
 export default {
-  props: ["id", "title", "size", "material", "quantity", "price", "image"],
+  props: [
+    "id",
+    "title",
+    "size",
+    "color",
+    "material",
+    "quantity",
+    "price",
+    "image",
+  ],
 
   name: "checkout-item",
 

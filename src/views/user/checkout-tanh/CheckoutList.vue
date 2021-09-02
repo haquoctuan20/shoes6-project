@@ -7,6 +7,7 @@
         v-bind:id="pro.id"
         v-bind:title="pro.title"
         v-bind:size="pro.size"
+        v-bind:color="pro.color"
         v-bind:material="pro.material"
         v-bind:quantity="pro.quantity"
         v-bind:price="pro.price"
@@ -15,18 +16,18 @@
     </div>
     <li class="subtotal">
       <div class="col">
-        <div class="col1">Subtotal</div>
-        <div class="col2" style="font-weight: 500;">${{ cartTotal }} USD</div>
+        <div class="col1">Tạm tính</div>
+        <div class="col2" style="font-weight: 500;">{{ cartTotal }} ₫</div>
       </div>
       <div class="col">
-        <div class="col1">Shipping</div>
-        <div class="col2" style="font-size: 12px">Calculated at next step</div>
+        <div class="col1">Phí vận chuyển</div>
+        <div class="col2" style="font-size: 12px">Miễn phí</div>
       </div>
     </li>
     <li class="total">
       <div class="col">
-        <div class="col1" style="font-size: 16px">Total</div>
-        <div class="col2">${{ cartTotal }} USD</div>
+        <div class="col1" style="font-size: 16px">Tổng tiền</div>
+        <div class="col2">{{ cartTotal }} ₫</div>
       </div>
     </li>
   </ul>

@@ -63,7 +63,7 @@
           <p>{{ product.salePrice * count }}</p>
         </div>
         <div class="acction">
-          <div class="addToCart">
+          <div class="addToCart" @click="addProductToCart">
             ADD TO CART
             <span>
               <img
@@ -156,6 +156,7 @@
 
 <script>
 import * as axios from "axios";
+import { mapActions } from "vuex";
 // Trang detail nhận vào id từ đương link trên trình duyệt (gọi là route),
 // lấy id đó để lấy thông tin tiét sản phẩm theo id
 export default {
@@ -169,6 +170,7 @@ export default {
   }),
 
   methods: {
+    ...mapActions(["addProductToList", "getSnackBars"]),
     /**
      * lấy id từ route
      * gọi hàm lấy ở mounted
@@ -201,6 +203,28 @@ export default {
       if (this.count > 1) {
         this.count--;
       }
+    },
+
+    // TA
+    addProductToCart() {
+      console.log(this.product);
+
+      const productAdd = {
+        id: this.product.id,
+        title: this.product.name,
+        size: this.product.size,
+        color: this.product.color,
+        material: this.product.material,
+        quantity: this.count,
+        price: this.product.salePrice,
+        image: this.product.avatar,
+      };
+
+      this.addProductToList(productAdd);
+      window.scrollTo(0, 0);
+      this.getSnackBars(
+        `Đã thêm sản phẩm ${this.product.name} số lượng ${this.count}`
+      );
     },
   },
 

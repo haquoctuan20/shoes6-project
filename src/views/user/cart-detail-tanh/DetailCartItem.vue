@@ -5,7 +5,7 @@
         <div class="image">
           <a href=""
             ><img
-              :src="require('../../../assets/img/'.concat(image))"
+              :src="require('../../../assets'.concat(image))"
               alt="Bast shoe"
           /></a>
         </div>
@@ -20,7 +20,7 @@
       </div>
     </td>
     <td>
-      <div class="price">${{ price }} USD</div>
+      <div class="price">{{ price }} ₫</div>
     </td>
     <td>
       <div class="quantity">
@@ -40,7 +40,7 @@
       </div>
     </td>
     <td>
-      <div class="total">${{ subTotal(quantity, price) }} USD</div>
+      <div class="total">{{ subTotal(quantity, price) }} ₫</div>
     </td>
     <td>
       <div class="remove">

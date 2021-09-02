@@ -18,7 +18,7 @@
       </div>
 
       <li class="cart-total">
-        CART TOTAL: &nbsp;&nbsp; <span class="total">${{ cartTotal }} USD</span>
+        TỔNG TIỀN: &nbsp;&nbsp; <span class="total">{{ cartTotal }} ₫</span>
         <div class="btn-cart">
           <button class="btn-checkout btn-cart__item" @click="openCheckout">
             <i class="fas fa-check-circle"> </i>
