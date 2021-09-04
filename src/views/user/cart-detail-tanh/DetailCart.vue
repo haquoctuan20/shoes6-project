@@ -3,19 +3,19 @@
     <div class="top">
       <h5 style="font-weight: bold;">GIỎ HÀNG CỦA BẠN</h5>
       <div style="font-size: 14px; margin-top: 10px;">
-        <span>Home</span>
+        <span>Trang chủ</span>
         <span>&ensp;/&ensp;</span>
-        <span>Your Shopping Cart</span>
+        <span>Giỏ hàng của bạn</span>
       </div>
     </div>
     <div v-if="listProducts.length">
       <table>
         <tr class="header-title">
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-          <th>Remove</th>
+          <th>Sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
+          <th>Hủy</th>
         </tr>
         <detail-cart-item
           v-for="pro in listProducts"
@@ -33,7 +33,7 @@
           <td colspan="2">
             <div class="note" v-if="!openNote">
               <a href="" v-on:click.prevent="OpenNote"
-                >Add a note to your order</a
+                >Thêm ghi chú cho đơn hàng</a
               >
             </div>
             <div class="note-open" v-if="openNote">
@@ -48,18 +48,24 @@
           <td colspan="3">
             <div class="cart-total-detail">
               <div class="total">
-                Subtotal &nbsp;&nbsp; ${{ cartTotal }} USD
+                Tổng &nbsp;&nbsp;
+                {{
+                  cartTotal.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })
+                }}
               </div>
               <div class="shipping">
-                Shipping, taxes, and discounts will be calculated at checkout.
+                Phí vận chuyển, thuế và chiết khấu sẽ được tính khi thanh toán.
               </div>
               <div class="btn-group">
                 <input
                   type="button"
-                  value="CONTINUE SHOPPING"
+                  value="TIÊP TỤC MUA SẮM"
                   @click="openHome"
                 />
-                <input type="submit" value="CHECK OUT" @click="openCheckout" />
+                <input type="submit" value="THANH TOÁN" @click="openCheckout" />
               </div>
             </div>
           </td>
@@ -68,12 +74,12 @@
     </div>
 
     <div class="empty" v-else>
-      <p style="font-size: 36px; margin-bottom: 15px;">Your Cart</p>
+      <p style="font-size: 36px; margin-bottom: 15px;">Giỏ hàng của bạn</p>
       <p style="margin-bottom: 15px;">
-        Your cart is currently empty!
+        Giỏ hàng của bạn đang trống
       </p>
       <p style="margin-bottom: 15px;">
-        Continue browsing <a href="#">here</a>.
+        <router-link to="/">Tiếp tục mua sắp!</router-link>.
       </p>
     </div>
   </div>
@@ -228,11 +234,11 @@ table {
   margin-left: 20px;
   font-size: 14px;
   color: white;
-  background: #571f9c;
+  background: var(--btn-default);
 }
 
 .cart-total .btn-group input:hover {
-  background: black;
+  background: var(--btn-hover);
 }
 
 .empty {

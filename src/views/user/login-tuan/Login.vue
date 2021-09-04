@@ -5,9 +5,8 @@
       <v-form>
         <v-text-field
           ref="email"
-          label="Email"
-          placeholder="...@gmail.com"
-          :rules="[rules.required, rules.email]"
+          label="Username đăng nhập"
+          :rules="[rules.required]"
           v-model="email"
         ></v-text-field>
         <v-text-field

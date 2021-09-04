@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout-form">
+  <div class="checkout-form--2">
     <div class="nav" style="font-size: 14px">
       <span style="color: #aaa;">Giỏ hàng</span>
       <span>&ensp;>&ensp;</span>
@@ -13,9 +13,8 @@
     <div class="account">
       <div class="avatar"></div>
       <div class="info">
-        <div>haha hihi (hki92076@eoopy.com)</div>
         <div>
-          <a href="" style="color: #cbba9c; text-decoration: none">Đăng xuất</a>
+          <strong>{{ userLogin.username }} </strong> ({{ userLogin.email }})
         </div>
       </div>
     </div>
@@ -141,7 +140,7 @@
       <div style="margin-top: 20px">
         <button @click.prevent="postCart">Thanh Toán</button>
         <a href="" style="margin-left: 20px" @click="openCartDetail"
-          >Quay về giỏ hàng</a
+          >Đến giỏ hàng</a
         >
       </div>
     </form>
@@ -158,8 +157,8 @@ export default {
     cart: {
       phone: "b",
       address: "b",
-      totalMoney: 10,
-      status: 0,
+      totalMoney: 0,
+      status: "Chờ xác nhận",
       userID: null,
     },
 
@@ -177,6 +176,10 @@ export default {
   computed: {
     listProducts() {
       return this.$store.state.listProducts;
+    },
+
+    userLogin() {
+      return this.$store.state.userLogin;
     },
 
     cartTotal() {
@@ -227,6 +230,9 @@ export default {
       this.cart.userID = this.$store.state.userLogin.id;
 
       this.cart.status = this.cart.status + "";
+      this.listProducts.map((item) => {
+        this.cart.totalMoney += item.price * item.quantity;
+      });
 
       axios
         .post("https://localhost:44380/cart", this.cart)
@@ -261,7 +267,7 @@ export default {
               console.log("thanh cong cart item");
               me2.getSnackBars("Đặt hàng thành công!");
               window.scrollTo(0, 0);
-              this.$store.state.listProducts = [];
+              me2.$store.state.listProducts = [];
             })
             .catch(function(err) {
               console.log(err + "cart item");
@@ -285,8 +291,8 @@ export default {
 </script>
 
 <style scoped>
-.checkout-form {
-  width: 100%;
+.checkout-form--2 {
+  /* width: 100%; */
   margin: auto;
   margin: 56px 66px;
   position: relative;

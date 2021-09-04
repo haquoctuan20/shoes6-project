@@ -6,19 +6,16 @@
         <v-dialog v-model="dialog" persistent max-width="500">
           <v-card>
             <v-card-title class="text-h5">
-              Bạn có muốn xóa sản phẩm: <br />
-              {{ productDelete.name }}?
+              Chắc chắn hủy đơn hàng này? <br />
             </v-card-title>
-            <v-card-text>
-              {{ productDelete.name }}
-            </v-card-text>
+            <v-card-text> </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="green darken-1" text @click="dialog = false">
-                Hủy
+                Giữ lại
               </v-btn>
-              <v-btn color="green darken-1" text @click="dialog = false">
-                Xóa
+              <v-btn color="green darken-1" text @click="cancelCart">
+                Hủy đơn
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -27,142 +24,57 @@
     </div>
 
     <!-- button thêm mới -->
-    <v-btn class="mb-2" depressed color="primary" @click="openAddEdit()">
+
+    <v-btn class="mb-2 ml-2" depressed color="primary" @click="getCartData()">
       <v-icon dark>
-        mdi-plus
+        mdi-refresh
       </v-icon>
-      Thêm mới
+      Làm mới danh sách
     </v-btn>
 
     <!-- form thêm mới, chi tiết -->
-    <div class="form-chitiet" v-if="Object.keys(productBySlug).length !== 0">
-      <!-- DONG SO 1 -->
-      <div class="form-rows">
-        <!-- avatar -->
-        <div class="form-col-row-1" v-if="productBySlug.avatar !== ''">
-          <img :src="require('@/assets'.concat(productBySlug.avatar))" alt="" />
-        </div>
 
-        <div class="form-col-row-1" v-if="productBySlug.avatar === ''">
-          <v-file-input
-            accept="image/png, image/jpeg, image/bmp"
-            placeholder="Chọn ảnh sản phẩm"
-            prepend-icon="mdi-camera"
-            label="Ảnh sản phẩm 1"
-          ></v-file-input>
+    <Loading v-if="loading" />
 
-          <v-file-input
-            accept="image/png, image/jpeg, image/bmp"
-            placeholder="Chọn ảnh sản phẩm"
-            prepend-icon="mdi-camera"
-            label="Ảnh sản phẩm 2"
-          ></v-file-input>
-        </div>
+    <!-- table -->
 
-        <div class="form-col-row-1" v-if="productBySlug.avatar !== ''">
-          <img
-            :src="require('@/assets'.concat(productBySlug.avatarr))"
-            alt=""
-          />
-        </div>
-
-        <div class="form-col-row-1" v-if="productBySlug.avatar === ''"></div>
-
-        <!-- COT SO 2 -->
-        <div class="form-col-row-1">
-          <v-text-field
-            label="ID sản phẩm"
-            v-model="productBySlug.id"
-            disabled
-            prepend-icon="mdi-group"
-          ></v-text-field>
-
-          <v-text-field
-            label="ID Category"
-            v-model="productBySlug.categoryID"
-          ></v-text-field>
-
-          <v-text-field
-            label="Tên sản phẩm"
-            v-model="productBySlug.name"
-          ></v-text-field>
-
-          <v-text-field
-            label="Slug sản phẩm"
-            v-model="productBySlug.slug"
-          ></v-text-field>
-
-          <v-text-field
-            label="Chất liệu sản phẩm"
-            v-model="productBySlug.material"
-          ></v-text-field>
-        </div>
-
-        <!-- COT SO 3 -->
-        <div class="form-col-row-1">
-          <v-text-field
-            label="Đánh giá sao"
-            v-model="productBySlug.rate"
-            disabled
-          ></v-text-field>
-
-          <v-text-field
-            label="Số lượng còn"
-            v-model="productBySlug.quantity"
-          ></v-text-field>
-
-          <v-text-field label="Giá gốc" v-model="originPrice"></v-text-field>
-
-          <v-text-field label="Giá đang bán" v-model="salePrice"></v-text-field>
-
-          <v-text-field
-            label="Loại giày"
-            v-model="productBySlug.type"
-          ></v-text-field>
-        </div>
-      </div>
-
-      <!-- DONG SO 2 -->
-      <div class="form-rows ">
-        <!-- COT SO 1 -->
-        <div class="form-col-row-222">
-          <v-textarea
-            class="pt-4"
-            label="Mô tả"
-            v-model="productBySlug.description"
-          ></v-textarea>
-        </div>
-
-        <!-- COT SO 2 -->
-        <div class="form-col-row-222">
-          <v-text-field
-            label="Màu sắc"
-            v-model="productBySlug.color"
-          ></v-text-field>
-
-          <v-text-field
-            label="Kích thước giày"
-            v-model="productBySlug.size"
-          ></v-text-field>
-        </div>
-
-        <!-- COT SO 3 -->
-        <div class="form-col-row-222">
-          <button class="btn-admin" @click="cancelAddEdit()">
-            Đồng ý
-          </button>
-          <button class="btn-admin btn-admin-cancel " @click="cancelAddEdit()">
-            Hủy
-          </button>
-          <button class="btn-admin btn-admin-cancel " @click="openTable()">
-            Danh sách sản phẩm
-          </button>
-        </div>
-      </div>
+    <div v-if="cartItemByID.length > 0">
+      <v-simple-table class="mb-4" fixed-header>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="">
+                STT
+              </th>
+              <th class="">
+                ID Sản phẩm
+              </th>
+              <th class="">
+                Màu sắc
+              </th>
+              <th class="">
+                Kích thước
+              </th>
+              <th class="">
+                Số lượng
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in cartItemByID" :key="item.id">
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.productID }}</td>
+              <td>{{ item.color }}</td>
+              <td>{{ item.size }}</td>
+              <td>{{ item.number }}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
     </div>
 
     <!-- table -->
-    <v-simple-table fixed-header height="80vh">
+    <v-simple-table fixed-header>
       <template v-slot:default>
         <thead>
           <tr>
@@ -170,19 +82,19 @@
               STT
             </th>
             <th class="">
-              ID Sản phẩm
+              ID Khách hàng
             </th>
             <th class="">
-              Tên sản phẩm
+              Địa chỉ khách hàng
             </th>
             <th class="">
-              Giá gốc
+              Số điện thoại
             </th>
             <th class="">
-              Giá bán
+              Tổng tiền
             </th>
             <th class="">
-              Loại
+              Trạng thái
             </th>
             <th class="">
               Chức năng
@@ -191,152 +103,155 @@
         </thead>
         <tbody>
           <tr
-            v-for="(item, index) in products"
+            v-for="(item, index) in cart"
             :key="item.id"
-            @dblclick="getProductDataBySlug(item)"
+            @dblclick="getCartItemByID(item)"
           >
             <td>{{ index + 1 }}</td>
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
+            <td>{{ item.userID }}</td>
+            <td>{{ item.address }}</td>
+            <td>{{ item.phone }}</td>
             <td>
               {{
-                item.originPrice
-                  ? item.originPrice.toLocaleString("vi-VN", {
-                      style: "currency",
-                      currency: "VND",
-                    })
-                  : 0
-              }}
-            </td>
-            <td>
-              {{
-                item.salePrice.toLocaleString("vi-VN", {
+                item.totalMoney.toLocaleString("vi-VN", {
                   style: "currency",
                   currency: "VND",
                 })
               }}
             </td>
-            <td>{{ item.type }}</td>
+            <td>{{ item.status }}</td>
+
             <td>
-              <v-btn small color="cyan" @click="getProductDataBySlug(item)">
+              <v-btn
+                small
+                class="mr-2"
+                color="cyan"
+                @click="getCartItemByID(item)"
+              >
                 <v-icon dark>
-                  mdi-pencil
+                  mdi-format-list-text
                 </v-icon>
               </v-btn>
 
+              <v-btn small class="mr-2" color="cyan" @click="acceptCart(item)">
+                Xác nhận
+              </v-btn>
+
               <v-btn
-                class="ml-2 color-minus"
+                class="color-minus"
                 small
                 color="cyan"
-                @click="openDeleteProduct(item)"
+                @click="OpenCancelCart(item)"
               >
-                <v-icon dark>
-                  mdi-minus
-                </v-icon>
+                Hủy đơn
               </v-btn>
             </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+
+    <Loading v-if="loading" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loading from "@/components/Loading.vue";
+import { mapActions } from "vuex";
 
 export default {
+  components: { Loading },
   data: () => ({
-    products: [],
+    cart: [],
     dialog: false,
-    productDelete: {},
-    productBySlug: {},
-    originPrice: 0,
-    salePrice: 0,
+
+    cartItemByID: [],
+
+    cartCancel: {},
+
+    loading: false,
   }),
 
   methods: {
-    async getProductData() {
+    ...mapActions(["getSnackBars"]),
+
+    async getCartData() {
+      this.cartByID = [];
+      this.loading = true;
       try {
-        const response = await axios.get("https://localhost:44380/product/all");
-        this.products = response.data;
-        console.log(this.products);
+        const response = await axios.get("https://localhost:44380/cart/all");
+        this.cart = response.data;
+        console.log(this.cart);
+        this.loading = false;
       } catch (error) {
         console.error(error);
       }
     },
 
-    openDeleteProduct(item) {
-      this.dialog = true;
-      this.productDelete = item;
-    },
-
-    async getProductDataBySlug(item) {
+    async getCartItemByID(item) {
+      this.loading = true;
       try {
         const response = await axios.get(
-          `https://localhost:44380/product/${item.slug}`
+          `https://localhost:44380/cart-item/${item.id}`
         );
-        this.productBySlug = response.data;
+        this.cartItemByID = response.data;
 
-        if (this.productBySlug.originPrice) {
-          this.originPrice = this.productBySlug.originPrice.toLocaleString(
-            "vi-VN",
-            {
-              style: "currency",
-              currency: "VND",
-            }
-          );
-        }
-
-        this.salePrice = this.productBySlug.salePrice.toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        });
-
-        console.log(this.productBySlug);
+        console.log(this.cartItemByID);
 
         window.scrollTo(0, 0);
+
+        this.loading = false;
       } catch (error) {
         console.error(error);
       }
     },
 
-    cancelAddEdit() {
-      this.productBySlug = {};
+    async acceptCart(item) {
+      this.loading = true;
+      item.status = "Đã xác nhận";
+      const me = this;
+      axios
+        .put(`https://localhost:44380/cart/${item.id}`, item)
+        .then(function(response) {
+          console.log(response);
+          me.getSnackBars(`Đã xác nhận đơn`);
+          me.getCartData();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
 
-    openAddEdit() {
-      this.productBySlug = {
-        avatar: "",
-        avatarr: "",
-        categoryID: "",
-        color: "",
-        createdAt: null,
-        description: "",
-        id: "",
-        material: "",
-        name: "",
-        originPrice: 0,
-        quantity: 0,
-        rate: 0,
-        salePrice: 0,
-        size: "",
-        slug: "",
-        type: "",
-        updatedAt: null,
-      };
-
-      this.originPrice = 0;
-      this.salePrice = 0;
+    async cancelCart() {
+      this.loading = true;
+      this.dialog = false;
+      this.cartCancel.status = "Hủy đơn";
+      const me = this;
+      axios
+        .put(`https://localhost:44380/cart/${me.cartCancel.id}`, me.cartCancel)
+        .then(function(response) {
+          console.log(response);
+          me.getSnackBars(`Đã hủy đơn`);
+          me.getCartData();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
 
     openTable() {
       window.scrollTo(0, 600);
     },
+
+    OpenCancelCart(item) {
+      this.dialog = true;
+      this.cartCancel = item;
+    },
   },
 
   created() {
-    this.getProductData();
+    this.getCartData();
   },
 };
 </script>
@@ -346,6 +261,7 @@ export default {
   margin: 0px !important;
   padding: 0px !important;
 }
+
 table tr {
   cursor: pointer;
 }

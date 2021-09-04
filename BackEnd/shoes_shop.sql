@@ -202,7 +202,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin@mail.com','0123456789','admin','admin','ADMIN',NULL,NULL),(2,'customer@mail.com','0987654321','customer','customer','CUSTOMER',NULL,NULL);
+INSERT INTO `user` VALUES (1,'admin@gmail.com','0123456789','admin','admin','ADMIN',NULL,NULL),(2,'customer@gmail.com','0987654321','customer','customer','CUSTOMER',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

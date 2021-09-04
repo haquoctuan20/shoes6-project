@@ -31,12 +31,31 @@
         </div>
         <span class="description">{{ product.description }}</span>
         <div class="price title">
-          <p>GIÁ NIÊM YẾT:</p>
-          <p>${{ product.originPrice }}</p>
+          <p>GIÁ GỐC:</p>
+          <p style="text-decoration: line-through">
+            {{
+              product.originPrice === null
+                ? product.salePrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })
+                : product.originPrice.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })
+            }}
+          </p>
         </div>
         <div class="priceSale title material">
-          <p>GIÁ BÁN:</p>
-          <p>${{ product.salePrice }}</p>
+          <p>GIẢM GIÁ CÒN:</p>
+          <p>
+            {{
+              product.salePrice.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })
+            }}
+          </p>
         </div>
         <div class="material title">
           <p>CHẤT LIỆU:</p>
@@ -48,7 +67,7 @@
         </div>
         <div class="material title">
           <p>SỐ LƯỢNG CÒN:</p>
-          <p>{{ product.quantity }}</p>
+          <p>{{ product.quantity - count }}</p>
         </div>
         <div class="material title">
           <p>CHỌN SỐ LƯỢNG:</p>
@@ -60,11 +79,18 @@
         </div>
         <div class="material title">
           <p>TỔNG TIỀN:</p>
-          <p>{{ product.salePrice * count }}</p>
+          <p>
+            {{
+              (product.salePrice * count).toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })
+            }}
+          </p>
         </div>
         <div class="acction">
           <div class="addToCart" @click="addProductToCart">
-            ADD TO CART
+            Thêm vào giỏ hàng
             <span>
               <img
                 id="cart"
@@ -72,20 +98,20 @@
                 alt=""
             /></span>
           </div>
-          <div class="buyNow">BUY IT NOW</div>
+          <div class="buyNow">Mua ngay</div>
           <div class="addToWishList">
             <span>
               <img id="heart" src="../../../assets/img/icon/heart.png" alt=""
             /></span>
-            ADD TO WISH LIST
+            Sản phẩm yêu thích
           </div>
         </div>
       </div>
     </div>
     <div class="related">
       <div class="title-related">
-        <p>Related Products</p>
-        <p>From this Collection</p>
+        <p>Những sảm phẩm tương tự</p>
+        <p>Từ Bộ sưu tập này</p>
       </div>
       <div class="list-related">
         <ul>
@@ -190,7 +216,7 @@ export default {
         "https://localhost:44380/product/" + this.slug
       );
       this.product = response.data;
-      console.log(this.dataColor);
+      // console.log(this.product.originPrice);
       const relateds = await axios.get("https://localhost:44380/product/all");
       this.productRelated = relateds.data.filter(
         (o, i) => o.type === this.product.type && i % 2 === 0
@@ -303,7 +329,10 @@ export default {
 }
 
 .description {
+  display: inline-block;
   font-size: 17px;
+  line-height: 20px;
+  text-align: justify;
 }
 
 .title {
@@ -379,7 +408,7 @@ export default {
   margin-top: 20px;
 }
 .acction div {
-  background-color: #571f9c;
+  background-color: var(--btn-default);
   color: white;
   margin: 5px;
   font-size: 16px;
@@ -402,9 +431,9 @@ export default {
 }
 
 .acction div:hover {
-  background-color: black;
-  transition: 1s;
-  transition-duration: 1s;
+  background-color: var(--btn-hover);
+  transition: 0.5s;
+  transition-duration: 0.5s;
 }
 
 .related {
