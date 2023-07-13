@@ -4,6 +4,8 @@
 
 https://shoes6-project.netlify.app
 
+VIDEO: https://youtu.be/dReGuZunOac
+
 ## Project setup
 
 ```
